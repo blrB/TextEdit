@@ -9,20 +9,36 @@ import java.awt.event.ActionListener;
  */
 public class TextToolBarBoxListener implements ActionListener {
 
+    private MainWindow ob;
+
+    public TextToolBarBoxListener(MainWindow ob){
+        this.ob = ob;
+    }
+
     public void actionPerformed(ActionEvent e) {
         JComboBox cb = (JComboBox)e.getSource();
-        //Action fontAction;
-        //String size = (String) cb.getSelectedItem();
+        String change = (String) cb.getSelectedItem();
         if (e.getActionCommand() == "BOX_SIZE") {
-            //fontAction = new StyledEditorKit.FontSizeAction(size, Integer.parseInt(size));
-            System.out.print("BOX_SIZE");
+            for (Line line: ob.textPanel.lines) {
+                for (Char ch : line.chars) {
+                    if (ch.getIsSelect()) {
+                        ch.setFontSize(Integer.parseInt(change));
+                    }
+                }
+            }
         }
         else {
-            //fontAction = new StyledEditorKit.FontFamilyAction(size, size);
-            System.out.print("BOX_FONT");
+            for (Line line: ob.textPanel.lines) {
+                for (Char ch : line.chars) {
+                    if (ch.getIsSelect()) {
+                        ch.setFontType(change);
+                    }
+                }
+            }
         }
-        //fontAction.actionPerformed(e);
-
+        ob.scrollPanel.revalidate();
+        ob.scrollPanel.repaint();
+        ob.frame.requestFocus();
     }
 
 }

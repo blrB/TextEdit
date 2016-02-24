@@ -9,9 +9,12 @@ import java.awt.event.ActionListener;
  */
 public class TextToolBar extends JToolBar {
 
-    public TextToolBar(){
-        ActionListener clickButton = new TextToolBarButtonListener();
-        ActionListener clickBox = new TextToolBarBoxListener();
+    private MainWindow ob;
+
+    public TextToolBar(MainWindow object){
+        this.ob = object;
+        ActionListener clickButton = new TextToolBarButtonListener(ob);
+        ActionListener clickBox = new TextToolBarBoxListener(ob);
 
         makeButton(new JButton(""), "SAVE.png", "BUTTON_SAVE", clickButton);
         makeButton(new JButton(""), "OPEN.png", "BUTTON_OPEN", clickButton);
@@ -20,7 +23,7 @@ public class TextToolBar extends JToolBar {
         makeButton(new JButton(""), "I.png", "BUTTON_FONT_I", clickButton);
         this.addSeparator();
 
-        String[] sizeFont = {"8", "9", "10", "12", "14", "16", "18", "22", "24", "48"};
+        String[] sizeFont = {"12", "14", "16", "18", "22", "24", "32", "36", "40", "48"};
         JComboBox sizeBox = new JComboBox(sizeFont);
         sizeBox.setMaximumSize(sizeBox.getPreferredSize());
         sizeBox.addActionListener(clickBox);

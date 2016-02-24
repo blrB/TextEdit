@@ -12,39 +12,49 @@ public class Line {
     private int maxLength;
     private int cordinateY;
     private int nomberLine;
+    private MainWindow ob;
 
     public ArrayList<Char> chars = new ArrayList<Char>();
 
-    public Line() {
+    public Line(MainWindow ob) {
+        this.ob = ob;
         maxHight = 15;
         maxLength = 0;
     }
 
     public void add(char ch) {
-        chars.add(new Char(ch));
+        chars.add(new Char(ch, ob));
     }
 
     public void add(int i, char ch) {
-        chars.add(i, new Char(ch));
-        TextPanel.incrementCaretX();
+        chars.add(i, new Char(ch, ob));
+        ob.textPanel.incrementCaretX();
+    }
+
+    public void add(Char ch) {
+        chars.add(new Char(ch, ob));
+    }
+
+    public void add(String ch, String font, String style, String size) {
+        chars.add(new Char(ch.charAt(0), font, style, size, ob));
     }
 
     public void remove(int caretX) {
         chars.remove(caretX-1);
     }
 
-    public static Line copySubLine(Line line, int x1, int x2){
-        Line newLine = new Line();
+    public Line copySubLine(int x1, int x2){
+        Line newLine = new Line(ob);
         for (int i = x1; i < x2; i++){
-            newLine.add(line.chars.get(i).getCharCh());
+            newLine.add(this.chars.get(i));
         }
         return newLine;
     }
 
-    public static void removeBack(Line line, int x){
-        int size = line.size();
+    public void removeBack(int x){
+        int size = this.size();
         for (int i = size; i > x; i--){
-            line.remove(i);
+            this.remove(i);
         }
     }
 
@@ -62,16 +72,25 @@ public class Line {
 
     public void setMaxLength(int l) { maxLength = l; }
 
+    public int getMaxLength() { return maxLength; }
+
     public void setCordinateY(int c) { cordinateY = c; }
 
     public void setNomberLine(int n) { nomberLine = n; }
 
     public void checkEndLine(Point2D p) {
-        if (p.getX() >= maxLength  && cordinateY-maxHight <= p.getY()){
-            TextPanel.setCaretCordinateX(maxLength);
-            TextPanel.setCaretCordinateY(cordinateY);
-            TextPanel.setCaretX(chars.size());
-            TextPanel.setCaretY(nomberLine);
+        if (cordinateY-maxHight <= p.getY()){
+            //ob.textPanel.setCaretCordinateX(maxLength);
+            //ob.textPanel.setCaretCordinateY(cordinateY);
+            ob.textPanel.setCaretX(chars.size());
+            ob.textPanel.setCaretY(nomberLine);
+            if (10 >= p.getX()){
+                //ob.textPanel.setCaretCordinateX(10);
+                ob.textPanel.setCaretX(0);
+            }
         }
     }
+
+    public void setMaxHightNumber(int n) { maxHight = n;}
+
 }
