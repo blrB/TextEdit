@@ -96,7 +96,7 @@ public class TextKeyListener implements KeyListener {
                     string += ch.getStringCh();
                 }
             }
-            if (line.chars.get(line.chars.size()-1).getIsSelect()) string += "\n";
+            if (line.chars.size()-1 >= 0 && line.chars.get(line.chars.size()-1).getIsSelect()) string += "\n";
         }
         StringSelection data = new StringSelection(string);
         try {
@@ -119,6 +119,7 @@ public class TextKeyListener implements KeyListener {
                 } else {
                     ob.textPanel.lines.get(ob.textPanel.getCaretY())
                             .add(ob.textPanel.getCaretX(), s.charAt(i));
+                    ob.textPanel.incrementCaretX();
                 }
             }
         } catch(Exception e) {
@@ -136,7 +137,7 @@ public class TextKeyListener implements KeyListener {
                     string += ch.getStringCh();
                 }
             }
-            if (line.chars.get(line.chars.size()-1).getIsSelect()) string += "\n";
+            if (line.chars.size()-1 >= 0 && line.chars.get(line.chars.size()-1).getIsSelect()) string += "\n";
         }
         StringSelection data = new StringSelection(string);
         try {
