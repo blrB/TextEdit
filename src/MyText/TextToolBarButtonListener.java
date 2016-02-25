@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+
 import org.w3c.dom.*;
 
 /**
@@ -45,7 +46,7 @@ public class TextToolBarButtonListener implements ActionListener {
                 saveFile();
             } catch (Exception eSave) {
                 JOptionPane.showMessageDialog
-                        (null,"Невозможно открыть файл", "Ошибка", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
+                        (null, "Can't save file", "ERROR", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
             }
         } else if (e.getActionCommand() == "BUTTON_EXIT") {
             System.exit(0);
@@ -96,6 +97,8 @@ public class TextToolBarButtonListener implements ActionListener {
             BufferedReader reader = new BufferedReader( new FileReader(fileName));
             String line = null;
             ob.textPanel.lines = new ArrayList<Line>();
+            ob.textPanel.setCaretX(0);
+            ob.textPanel.setCaretY(0);
             while( ( line = reader.readLine() ) != null ) {
                 Line newLine = new Line(ob);
                 char [] newCharArray = line.toCharArray ();
@@ -107,19 +110,21 @@ public class TextToolBarButtonListener implements ActionListener {
         }
         catch ( IOException e ) {
             JOptionPane.showMessageDialog
-                    (null,"Невозможно открыть файл", "Ошибка", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
+                    (null, "Can't open file", "ERROR", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
         }
     }
 
     public void openXMLFile(String fileName){
         try {
-            final File xmlFile = new File(fileName);
+            File xmlFile = new File(fileName);
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(xmlFile);
             doc.getDocumentElement().normalize();
             NodeList nodeList = doc.getElementsByTagName("line");
             ob.textPanel.lines = new ArrayList<Line>();
+            ob.textPanel.setCaretX(0);
+            ob.textPanel.setCaretY(0);
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Line newLine = new Line(ob);
                 Node node = nodeList.item(i);
@@ -139,40 +144,35 @@ public class TextToolBarButtonListener implements ActionListener {
         }
         catch(Exception eOpen){
             JOptionPane.showMessageDialog
-                    (null, "Невозможно открыть файл", "Ошибка", JOptionPane.ERROR_MESSAGE | JOptionPane.OK_OPTION);
+                    (null, "Can't open file", "ERROR", JOptionPane.ERROR_MESSAGE | JOptionPane.OK_OPTION);
         }
     }
 
-    public void saveFile() throws TransformerException, IOException {
+    public void saveFile() throws TransformerException, IOException, ParserConfigurationException {
         JFileChooser fc = new JFileChooser();
         if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-            FileWriter fw = new FileWriter(fc.getSelectedFile() + ".mytext");
-        }
-        DocumentBuilder builder = null;
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try {
+            DocumentBuilder builder = null;
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             builder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-        Document doc = builder.newDocument();
-        Element textXML = doc.createElement("text");
-        for (Line line: ob.textPanel.lines) {
-            Element lineXML = doc.createElement("line");
-            for (Char ch : line.chars) {
-                Element chXML = doc.createElement("char");
-                chXML.setAttribute("font", ch.getFontType());
-                chXML.setAttribute("style", Integer.toString(ch.getFontStyles()));
-                chXML.setAttribute("size", Integer.toString(ch.getFontSize()));
-                chXML.appendChild(doc.createTextNode(ch.getStringCh()));
-                lineXML.appendChild(chXML);
+            Document doc = builder.newDocument();
+            Element textXML = doc.createElement("text");
+            for (Line line: ob.textPanel.lines) {
+                Element lineXML = doc.createElement("line");
+                for (Char ch : line.chars) {
+                    Element chXML = doc.createElement("char");
+                    chXML.setAttribute("font", ch.getFontType());
+                    chXML.setAttribute("style", Integer.toString(ch.getFontStyles()));
+                    chXML.setAttribute("size", Integer.toString(ch.getFontSize()));
+                    chXML.appendChild(doc.createTextNode(ch.getStringCh()));
+                    lineXML.appendChild(chXML);
+                }
+                textXML.appendChild(lineXML);
             }
-            textXML.appendChild(lineXML);
+            doc.appendChild(textXML);
+            Transformer t = TransformerFactory.newInstance().newTransformer();
+            t.transform(new DOMSource(doc),
+                    new StreamResult(new FileOutputStream(fc.getSelectedFile() + ".mytext")));
         }
-        doc.appendChild(textXML);
-        Transformer t = TransformerFactory.newInstance().newTransformer();
-        t.transform(new DOMSource(doc),
-                new StreamResult(new FileOutputStream(fc.getSelectedFile() + ".mytext")));
     }
 
     public static String getExtension(String fileName) {
@@ -185,4 +185,3 @@ public class TextToolBarButtonListener implements ActionListener {
     }
 
 }
-

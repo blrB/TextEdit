@@ -1,7 +1,8 @@
 package MyText;
 
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by andrey on 20/02/16.
@@ -14,7 +15,7 @@ public class Line {
     private int nomberLine;
     private MainWindow ob;
 
-    public ArrayList<Char> chars = new ArrayList<Char>();
+    public List<Char> chars = new LinkedList<Char>();
 
     public Line(MainWindow ob) {
         this.ob = ob;
@@ -26,17 +27,16 @@ public class Line {
         chars.add(new Char(ch, ob));
     }
 
-    public void add(int i, char ch) {
-        chars.add(i, new Char(ch, ob));
-        ob.textPanel.incrementCaretX();
-    }
-
     public void add(Char ch) {
         chars.add(new Char(ch, ob));
     }
 
     public void add(String ch, String font, String style, String size) {
         chars.add(new Char(ch.charAt(0), font, style, size, ob));
+    }
+
+    public void add(int i, char ch) {
+        chars.add(i, new Char(ch, ob));
     }
 
     public void remove(int caretX) {
@@ -80,12 +80,9 @@ public class Line {
 
     public void checkEndLine(Point2D p) {
         if (cordinateY-maxHight <= p.getY()){
-            //ob.textPanel.setCaretCordinateX(maxLength);
-            //ob.textPanel.setCaretCordinateY(cordinateY);
             ob.textPanel.setCaretX(chars.size());
             ob.textPanel.setCaretY(nomberLine);
             if (10 >= p.getX()){
-                //ob.textPanel.setCaretCordinateX(10);
                 ob.textPanel.setCaretX(0);
             }
         }

@@ -31,4 +31,5 @@ public class TextMenuBar extends JMenuBar {
         fileMenu.add(exit);
         this.add(fileMenu);
     }
+
 }

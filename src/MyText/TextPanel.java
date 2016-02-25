@@ -3,7 +3,9 @@ package MyText;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by andrey on 19/02/16.
@@ -14,9 +16,11 @@ public class TextPanel  extends JComponent{
     private int caretY;
     private int caretCordinateX;
     private int caretCordinateY;
+    private int sizeNow;
+    private String fontNow;
     private MainWindow ob;
 
-    public ArrayList<Line> lines = new ArrayList<Line>();
+    public List<Line> lines = new ArrayList<Line>();
 
     public TextPanel(MainWindow ob){
         this.ob = ob;
@@ -25,6 +29,7 @@ public class TextPanel  extends JComponent{
         lines.add(newLine);
         caretX=0;
         caretY=0;
+        TextCaretTimer textCaretTimer = new TextCaretTimer(this);
     }
 
     protected void paintComponent(Graphics graphics) {
@@ -82,7 +87,7 @@ public class TextPanel  extends JComponent{
                 caretCordinateY = y;
             }
         }
-        setPreferredSize(new Dimension(xMax+10, y+10));
+        setPreferredSize(new Dimension(xMax + 50, y + 50));
     }
 
     public void setCaretX(int x){
@@ -99,6 +104,14 @@ public class TextPanel  extends JComponent{
 
     public int getCaretY(){
         return caretY;
+    }
+
+    public void setSizeNow(int size) {
+        sizeNow = size;
+    }
+
+    public void setFontNow(String font){
+        fontNow = font;
     }
 
     public void incrementCaretX() {
@@ -194,6 +207,8 @@ public class TextPanel  extends JComponent{
         caretCordinateX = x;
     }
 
-    public void setCaretCordinateY(int y) { caretCordinateY = y; }
+    public void setCaretCordinateY(int y) {
+        caretCordinateY = y;
+    }
 
 }

@@ -39,10 +39,10 @@ public class MainWindow {
 
         frame.setSize(800,600);
         frame.setVisible(true);
-        TextCaretTimer textCaretTimer = new TextCaretTimer(this);
     }
 
     public static void main(String[] args){
         MainWindow mw = new MainWindow();
     }
+
 }

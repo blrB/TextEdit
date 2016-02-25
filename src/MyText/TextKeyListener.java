@@ -49,48 +49,25 @@ public class TextKeyListener implements KeyListener {
             } else if (!systemKey(keyEvent.getKeyCode())) {
                 ob.textPanel.lines.get(ob.textPanel.getCaretY())
                         .add(ob.textPanel.getCaretX(), keyEvent.getKeyChar());
+                ob.textPanel.incrementCaretX();
             }
+            followCaret();
             ob.scrollPanel.revalidate();
             ob.scrollPanel.repaint();
             ob.frame.requestFocus();
         }
     }
 
-    public void keyReleased(KeyEvent keyEvent) {
-    }
-
-    public void keyTyped(KeyEvent keyEvent) {
-    }
-
-    boolean systemKey(int e)
-    {
-        return (e == KeyEvent.VK_ALT ||
-                e == KeyEvent.VK_SHIFT ||
-                e == KeyEvent.VK_CAPS_LOCK ||
-                e == KeyEvent.VK_ESCAPE ||
-                e == KeyEvent.VK_F1 ||
-                e == KeyEvent.VK_F2 ||
-                e == KeyEvent.VK_F3 ||
-                e == KeyEvent.VK_F4 ||
-                e == KeyEvent.VK_F5 ||
-                e == KeyEvent.VK_F6 ||
-                e == KeyEvent.VK_F7 ||
-                e == KeyEvent.VK_F8 ||
-                e == KeyEvent.VK_F9 ||
-                e == KeyEvent.VK_F10 ||
-                e == KeyEvent.VK_F11 ||
-                e == KeyEvent.VK_F12 ||
-                e == KeyEvent.VK_TAB ||
-                e == KeyEvent.VK_WINDOWS ||
-                e == KeyEvent.VK_INSERT ||
-                e == KeyEvent.VK_PAGE_DOWN ||
-                e == KeyEvent.VK_PAGE_UP ||
-                e == KeyEvent.VK_END ||
-                e == KeyEvent.VK_PAUSE ||
-                e == KeyEvent.VK_HOME ||
-                e == KeyEvent.VK_NUM_LOCK ||
-                e == KeyEvent.VK_CONTROL
-        );
+    void followCaret(){
+        int x = 0;
+        if (ob.textPanel.getCaretCordinateX() > ob.frame.getWidth()){
+            x = ob.textPanel.getCaretCordinateX();
+        }
+        int y = ob.textPanel.getCaretCordinateY() -
+                ob.textPanel.lines.get(ob.textPanel.getCaretY()).getMaxHight();
+        JViewport scrollPanel = ob.scrollPanel.getViewport();
+        scrollPanel.setViewPosition(new Point(x, y));
+        ob.scrollPanel.setViewport(scrollPanel);
     }
 
     void deleteSelectedText(){
@@ -122,13 +99,12 @@ public class TextKeyListener implements KeyListener {
             if (line.chars.get(line.chars.size()-1).getIsSelect()) string += "\n";
         }
         StringSelection data = new StringSelection(string);
-        try{
+        try {
             Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
             c.setContents(data,null);
-        }catch(Exception e)
-        {
+        } catch(Exception e) {
             JOptionPane.showMessageDialog
-                    (null,"Невозможно скопировать", "Ошибка", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
+                    (null, "Can't copy text", "ERROR", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
         }
     }
 
@@ -145,10 +121,9 @@ public class TextKeyListener implements KeyListener {
                             .add(ob.textPanel.getCaretX(), s.charAt(i));
                 }
             }
-        }catch(Exception e)
-        {
+        } catch(Exception e) {
             JOptionPane.showMessageDialog
-                    (null,"Невозможно вставить текст", "Ошибка", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
+                    (null, "Can't past text", "ERROR", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
         }
     }
 
@@ -167,11 +142,45 @@ public class TextKeyListener implements KeyListener {
         try {
             Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
             c.setContents(data,null);
-        }catch(Exception e)
-        {
+        } catch(Exception e) {
             JOptionPane.showMessageDialog
-                    (null,"Невозможно вырезать текст", "Ошибка", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
+                    (null, "Can't cut text", "ERROR", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
         }
+    }
+
+    public void keyReleased(KeyEvent keyEvent) {
+    }
+
+    public void keyTyped(KeyEvent keyEvent) {
+    }
+
+    boolean systemKey(int e) {
+        return (e == KeyEvent.VK_ALT ||
+                e == KeyEvent.VK_SHIFT ||
+                e == KeyEvent.VK_CAPS_LOCK ||
+                e == KeyEvent.VK_ESCAPE ||
+                e == KeyEvent.VK_F1 ||
+                e == KeyEvent.VK_F2 ||
+                e == KeyEvent.VK_F3 ||
+                e == KeyEvent.VK_F4 ||
+                e == KeyEvent.VK_F5 ||
+                e == KeyEvent.VK_F6 ||
+                e == KeyEvent.VK_F7 ||
+                e == KeyEvent.VK_F8 ||
+                e == KeyEvent.VK_F9 ||
+                e == KeyEvent.VK_F10 ||
+                e == KeyEvent.VK_F11 ||
+                e == KeyEvent.VK_F12 ||
+                e == KeyEvent.VK_TAB ||
+                e == KeyEvent.VK_WINDOWS ||
+                e == KeyEvent.VK_INSERT ||
+                e == KeyEvent.VK_PAGE_DOWN ||
+                e == KeyEvent.VK_PAGE_UP ||
+                e == KeyEvent.VK_END ||
+                e == KeyEvent.VK_PAUSE ||
+                e == KeyEvent.VK_HOME ||
+                e == KeyEvent.VK_NUM_LOCK ||
+                e == KeyEvent.VK_CONTROL);
     }
 
 }

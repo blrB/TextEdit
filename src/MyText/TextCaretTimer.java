@@ -9,21 +9,19 @@ import java.util.TimerTask;
  */
 public class TextCaretTimer {
 
-    private MainWindow ob;
+    private TextPanel ob;
 
-    public TextCaretTimer (Object object) {
-        this.ob = (MainWindow)object;
+    public TextCaretTimer (TextPanel object) {
+        this.ob = object;
         final Timer time = new Timer();
 
         time.schedule(new TimerTask() {
             public void run() {
-                int caretCordinateX = ob.textPanel.getCaretCordinateX();
-                int caretCordinateY = ob.textPanel.getCaretCordinateY();
-                Graphics2D graphics2d = (Graphics2D) ob.textPanel.getGraphics();
+                int caretCordinateX = ob.getCaretCordinateX();
+                int caretCordinateY = ob.getCaretCordinateY();
+                Graphics2D graphics2d = (Graphics2D) ob.getGraphics();
                 try {
-                    Char ch = ob.textPanel.lines.get(ob.textPanel.getCaretY())
-                            .chars.get(ob.textPanel.getCaretX()-1);
-                    Font f = new Font(ch.getFontType(), ch.getFontStyles(), ch.getFontSize());
+                    Font f = getPrevFont();
                     graphics2d.setFont(f);
                 } catch (Exception e){}
                 graphics2d.drawString("_",caretCordinateX,caretCordinateY);
@@ -32,11 +30,31 @@ public class TextCaretTimer {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                caretCordinateX = ob.textPanel.getCaretCordinateX();
-                caretCordinateY = ob.textPanel.getCaretCordinateY();
-                graphics2d.setColor(ob.scrollPanel.getBackground());
+                caretCordinateX = ob.getCaretCordinateX();
+                caretCordinateY = ob.getCaretCordinateY();
+                graphics2d.setColor(ob.getBackground());
                 graphics2d.drawString("_",caretCordinateX,caretCordinateY);
             }
         }, 500, 1000);
     }
+
+    public Font getPrevFont(){
+        if (ob.getCaretX() == 0 && ob.getCaretY() == 0){
+            return new Font("DejaVu Sans", 0 , 12);
+        } else {
+            if (ob.lines.get(ob.getCaretY()).size() != 0
+                    && ob.getCaretX() != 0) {
+                Char prevCh = ob.lines.get(ob.getCaretY())
+                        .chars.get(ob.getCaretX() - 1);
+                return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
+            } else {
+                int i = ob.getCaretY();
+                while (ob.lines.get(i - 1).size() == 0 && i > 0) i--;
+                Char prevCh = ob.lines.get(i - 1)
+                        .chars.get(ob.lines.get(i - 1).chars.size() - 1);
+                return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
+            }
+        }
+    }
+
 }

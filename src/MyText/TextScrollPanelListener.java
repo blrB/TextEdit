@@ -17,4 +17,5 @@ public class TextScrollPanelListener implements AdjustmentListener {
     public void adjustmentValueChanged(AdjustmentEvent evt) {
         ob.textPanel.repaint();
     }
+
 }

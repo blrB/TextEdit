@@ -3,6 +3,7 @@ package MyText;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 /**
  * Created by andrey on 19/02/16.
@@ -31,6 +32,7 @@ public class TextToolBar extends JToolBar {
 
         String [] fontType = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         JComboBox fontBox = new JComboBox(fontType);
+        fontBox.setSelectedIndex(Arrays.asList(fontType).indexOf("DejaVu Sans"));
         fontBox.setMaximumSize(fontBox.getPreferredSize());
         fontBox.addActionListener(clickBox);
         fontBox.setActionCommand("BOX_FONT");
@@ -51,4 +53,5 @@ public class TextToolBar extends JToolBar {
 
         this.add(button);
     }
+
 }

@@ -24,24 +24,7 @@ public class Char{
         this.ob = objects;
         this.ch = ch;
         isSelect = false;
-        try {
-            if (ob.textPanel.lines.get(ob.textPanel.getCaretY()).size() != 0
-                    && ob.textPanel.getCaretX() != 0) {
-                Char prevCh = ob.textPanel.lines.get(ob.textPanel.getCaretY())
-                        .chars.get(ob.textPanel.getCaretX() - 1);
-                font = new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
-                fontStyle = prevCh.getFontStyles();
-            } else {
-                int i = ob.textPanel.getCaretY();
-                while (ob.textPanel.lines.get(i - 1).size() == 0 && i > 0) i--;
-                Char prevCh = ob.textPanel.lines.get(i - 1)
-                            .chars.get(ob.textPanel.lines.get(i - 1).chars.size() - 1);
-                font = new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
-                fontStyle = prevCh.getFontStyles();
-            }
-        } catch (Exception e){
-            font = new Font("Arial", 0 , 12);
-        }
+        font = getPrevFont();
     }
 
     public Char(Char ch, MainWindow objects) {
@@ -108,6 +91,27 @@ public class Char{
         }
     }
 
+    public Font getPrevFont(){
+        if (ob.textPanel.getCaretX() == 0 && ob.textPanel.getCaretY() == 0){
+            return new Font("DejaVu Sans", 0 , 12);
+        } else {
+            if (ob.textPanel.lines.get(ob.textPanel.getCaretY()).size() != 0
+                    && ob.textPanel.getCaretX() != 0) {
+                Char prevCh = ob.textPanel.lines.get(ob.textPanel.getCaretY())
+                        .chars.get(ob.textPanel.getCaretX() - 1);
+                fontStyle = prevCh.getFontStyles();
+                return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
+            } else {
+                int i = ob.textPanel.getCaretY();
+                while (ob.textPanel.lines.get(i - 1).size() == 0 && i > 0) i--;
+                Char prevCh = ob.textPanel.lines.get(i - 1)
+                        .chars.get(ob.textPanel.lines.get(i - 1).chars.size() - 1);
+                fontStyle = prevCh.getFontStyles();
+                return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
+            }
+        }
+    }
+
     public void setFontSize(int size){
         font = new Font(font.getFontName(), getFontStyles(), size);
     }
@@ -115,8 +119,6 @@ public class Char{
     public void setCaret(Point2D p){
         boolean answer = (x <= p.getX() && x+wight >= p.getX() && y-height <= p.getY() && y >= p.getY());
         if (answer){
-            //ob.textPanel.setCaretCordinateX(x);
-            //ob.textPanel.setCaretCordinateY(y);
             ob.textPanel.setCaretX(nomberLetter);
             ob.textPanel.setCaretY(nomberString);
         }
@@ -171,11 +173,6 @@ public class Char{
     public int getNomberString(){ return nomberString; }
 
     public int getNomberLetter(){ return nomberLetter; };
-
-    public void selection(Point one, Point now) {
-        this.setIsSelect(this.contains(one));
-        this.setIsSelect(this.contains(now));
-    }
 
     public void setNormalizationBold() {
         if (fontStyle == 0) {
