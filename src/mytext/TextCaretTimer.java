@@ -1,4 +1,4 @@
-package MyText;
+package mytext;
 
 import java.awt.*;
 import java.util.Timer;
@@ -40,7 +40,7 @@ public class TextCaretTimer {
 
     public Font getPrevFont(){
         if (ob.getCaretX() == 0 && ob.getCaretY() == 0){
-            return new Font("DejaVu Sans", 0 , 12);
+            return new Font(Font.MONOSPACED, 0 , 12);
         } else {
             if (ob.lines.get(ob.getCaretY()).size() != 0
                     && ob.getCaretX() != 0) {

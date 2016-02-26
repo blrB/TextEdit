@@ -1,4 +1,4 @@
-package MyText;
+package mytext;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -8,35 +8,37 @@ import java.awt.geom.Point2D;
  */
 public class Char{
 
+    //private MainWindow mainWindow;
+    private TextPanel textPanel;
     private char ch;
     private int height;
     private int wight;
     private int x;
     private int y;
-    private int nomberString;
-    private int nomberLetter;
     private int fontStyle;
     private Font font;
     private Boolean isSelect;
-    private MainWindow ob;
 
-    public Char(char ch, MainWindow objects){
-        this.ob = objects;
+    public Char(char ch, MainWindow mainWindow){
+        //this.mainWindow = mainWindow;
+        textPanel = mainWindow.textPanel;
         this.ch = ch;
         isSelect = false;
         font = getPrevFont();
     }
 
-    public Char(Char ch, MainWindow objects) {
-        this.ob = objects;
+    public Char(Char ch, MainWindow mainWindow) {
+        //this.mainWindow = mainWindow;
+        textPanel = mainWindow.textPanel;
         this.ch = ch.getCharCh();
         this.font = ch.getFont();
         this.isSelect = ch.getIsSelect();
         this.fontStyle = ch.getFontStyles();
     }
 
-    public Char(char ch, String font, String style, String size, MainWindow objects) {
-        this.ob = objects;
+    public Char(char ch, String font, String style, String size, MainWindow mainWindow) {
+        //this.mainWindow = mainWindow;
+        textPanel = mainWindow.textPanel;
         this.ch = ch;
         this.font = new Font(font, Integer.parseInt(style) , Integer.parseInt(size));
         this.isSelect = false;
@@ -92,20 +94,20 @@ public class Char{
     }
 
     public Font getPrevFont(){
-        if (ob.textPanel.getCaretX() == 0 && ob.textPanel.getCaretY() == 0){
-            return new Font("DejaVu Sans", 0 , 12);
+        if (textPanel.getCaretX() == 0 && textPanel.getCaretY() == 0){
+            return new Font(Font.MONOSPACED, 0 , 12);
         } else {
-            if (ob.textPanel.lines.get(ob.textPanel.getCaretY()).size() != 0
-                    && ob.textPanel.getCaretX() != 0) {
-                Char prevCh = ob.textPanel.lines.get(ob.textPanel.getCaretY())
-                        .chars.get(ob.textPanel.getCaretX() - 1);
+            if (textPanel.lines.get(textPanel.getCaretY()).size() != 0
+                    && textPanel.getCaretX() != 0) {
+                Char prevCh = textPanel.lines.get(textPanel.getCaretY())
+                        .chars.get(textPanel.getCaretX() - 1);
                 fontStyle = prevCh.getFontStyles();
                 return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
             } else {
-                int i = ob.textPanel.getCaretY();
-                while (ob.textPanel.lines.get(i - 1).size() == 0 && i > 0) i--;
-                Char prevCh = ob.textPanel.lines.get(i - 1)
-                        .chars.get(ob.textPanel.lines.get(i - 1).chars.size() - 1);
+                int i = textPanel.getCaretY();
+                while (textPanel.lines.get(i - 1).size() == 0 && i > 0) i--;
+                Char prevCh = textPanel.lines.get(i - 1)
+                        .chars.get(textPanel.lines.get(i - 1).chars.size() - 1);
                 fontStyle = prevCh.getFontStyles();
                 return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
             }
@@ -114,14 +116,6 @@ public class Char{
 
     public void setFontSize(int size){
         font = new Font(font.getFontName(), getFontStyles(), size);
-    }
-
-    public void setCaret(Point2D p){
-        boolean answer = (x <= p.getX() && x+wight >= p.getX() && y-height <= p.getY() && y >= p.getY());
-        if (answer){
-            ob.textPanel.setCaretX(nomberLetter);
-            ob.textPanel.setCaretY(nomberString);
-        }
     }
 
     public boolean contains(Point2D p){
@@ -134,7 +128,6 @@ public class Char{
         Point leftPoint = (one.getX() < two.getX()) ? one : two;
         Point rightPoint = (one.getX() < two.getX()) ? two : one;
 
-        setCaret(two);
         if (y < downPoint.getY() || y-height > upPoint.getY()) {
             return ((x >= upPoint.getX()) && y - height < upPoint.getY() && y >= upPoint.getY() ||
                     (x <= downPoint.getX()) && y - height <= downPoint.getY() && y >= downPoint.getY() ||
@@ -165,14 +158,6 @@ public class Char{
     public void setY(int y){ this.y = y;}
 
     public int getY(){ return y;}
-
-    public void setNomberLetter(int x) { nomberLetter = x; }
-
-    public void setNomberString(int y) { nomberString = y; }
-
-    public int getNomberString(){ return nomberString; }
-
-    public int getNomberLetter(){ return nomberLetter; };
 
     public void setNormalizationBold() {
         if (fontStyle == 0) {

@@ -1,7 +1,11 @@
-package MyText;
+package mytext;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
 import java.awt.geom.Rectangle2D;
 
 import java.util.ArrayList;
@@ -16,20 +20,18 @@ public class TextPanel  extends JComponent{
     private int caretY;
     private int caretCordinateX;
     private int caretCordinateY;
-    private int sizeNow;
-    private String fontNow;
-    private MainWindow ob;
+    private MainWindow mainWindow;
 
     public List<Line> lines = new ArrayList<Line>();
 
-    public TextPanel(MainWindow ob){
-        this.ob = ob;
-        setLayout(new BorderLayout());
-        Line newLine = new Line(ob);
-        lines.add(newLine);
+    public TextPanel(MainWindow mainWindow){
+        this.mainWindow = mainWindow;
         caretX=0;
         caretY=0;
+        //Line newLine = new Line(mainWindow);
+        //lines.add(newLine);
         TextCaretTimer textCaretTimer = new TextCaretTimer(this);
+        setLayout(new BorderLayout());
     }
 
     protected void paintComponent(Graphics graphics) {
@@ -46,11 +48,11 @@ public class TextPanel  extends JComponent{
         }
         int y=10;
         int xMax = 0;
-        int letterY=-1;
+        int lineY=-1;
         for (Line line: lines) {
             y += line.getMaxHight();
             int x=10;
-            letterY++;
+            lineY++;
             int letterX=0;
             for (Char ch: line.chars) {
                 letterX++;
@@ -70,19 +72,17 @@ public class TextPanel  extends JComponent{
                 ch.setWight(fm.stringWidth(ch.getStringCh()));
                 ch.setX(x);
                 ch.setY(y);
-                ch.setNomberLetter(letterX);
-                ch.setNomberString(letterY);
                 x += fm.stringWidth(ch.getStringCh())+1;
-                if (caretX == letterX && caretY == letterY){
+                if (caretX == letterX && caretY == lineY){
                     caretCordinateX = x;
                     caretCordinateY = y;
                 }
             }
             line.setMaxLength(x);
             line.setCordinateY(y);
-            line.setNomberLine(letterY);
+            line.setNumberLine(lineY);
             xMax = xMax < x ? x : xMax;
-            if (caretX == 0 && caretY == letterY){
+            if (caretX == 0 && caretY == lineY){
                 caretCordinateX = 10;
                 caretCordinateY = y;
             }
@@ -104,14 +104,6 @@ public class TextPanel  extends JComponent{
 
     public int getCaretY(){
         return caretY;
-    }
-
-    public void setSizeNow(int size) {
-        sizeNow = size;
-    }
-
-    public void setFontNow(String font){
-        fontNow = font;
     }
 
     public void incrementCaretX() {
@@ -203,12 +195,133 @@ public class TextPanel  extends JComponent{
         return caretCordinateY;
     }
 
-    public void setCaretCordinateX(int x){
-        caretCordinateX = x;
+    public void changeSizeFont(ActionEvent e){
+        JComboBox cb = (JComboBox)e.getSource();
+        String change = (String) cb.getSelectedItem();
+        for (Line line: lines) {
+            for (Char ch : line.chars) {
+                if (ch.getIsSelect()) {
+                    ch.setFontSize(Integer.parseInt(change));
+                }
+            }
+        }
+        mainWindow.updateWindow();
     }
 
-    public void setCaretCordinateY(int y) {
-        caretCordinateY = y;
+    public void changeTypeFont(ActionEvent e){
+        JComboBox cb = (JComboBox)e.getSource();
+        String change = (String) cb.getSelectedItem();
+        for (Line line: lines) {
+            for (Char ch : line.chars) {
+                if (ch.getIsSelect()) {
+                    ch.setFontType(change);
+                }
+            }
+        }
+        mainWindow.updateWindow();
+    }
+
+    public void changeStyleOnBold(){
+        boolean bold = false, notBold = false;
+        for (Line line: lines) {
+            for (Char ch : line.chars) {
+                if (ch.getIsSelect()) {
+                    if (ch.getFontStyles() == 0 || ch.getFontStyles() == 2) notBold = true;
+                    if (ch.getFontStyles() == 1 || ch.getFontStyles() == 3) bold = true;
+                }
+            }
+        }
+        for (Line line: lines) {
+            for (Char ch : line.chars) {
+                if (ch.getIsSelect()) {
+                    if (bold && notBold) ch.setNormalizationBold();
+                    else ch.setFontStyles(1);
+                }
+            }
+        }
+        mainWindow.updateWindow();
+    }
+
+    public void changeStyleOnItalic(){
+        boolean italic = false, notItalic = false;
+        for (Line line: lines) {
+            for (Char ch : line.chars) {
+                if (ch.getIsSelect()){
+                    if (ch.getFontStyles() == 0 || ch.getFontStyles() == 1) notItalic = true;
+                    if (ch.getFontStyles() == 2 || ch.getFontStyles() == 3) italic = true;
+                }
+            }
+        }
+        for (Line line: lines) {
+            for (Char ch : line.chars) {
+                if (ch.getIsSelect()){
+                    if (italic && notItalic) ch.setNormalizationItalic();
+                    else ch.setFontStyles(2);
+                }
+            }
+        }
+        mainWindow.updateWindow();
+    }
+
+    public void copy()
+    {
+        String string = "";
+        for (Line line: lines) {
+            for (Char ch : line.chars) {
+                if (ch.getIsSelect()){
+                    string += ch.getStringCh();
+                }
+            }
+            if (line.chars.size()-1 >= 0 && line.chars.get(line.chars.size()-1).getIsSelect()) string += "\n";
+        }
+        StringSelection data = new StringSelection(string);
+        try {
+            Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+            c.setContents(data,null);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog
+                    (null, "Can't copy text", "ERROR", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
+        }
+    }
+
+    public void paste()
+    {
+        try {
+            Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+            String s = (String) c.getData(DataFlavor.stringFlavor);
+            for (int i = 0; i < s.length(); i++){
+                if (s.charAt(i) == '\n') {
+                    newLine();
+                } else {
+                    lines.get(getCaretY()).add(getCaretX(), s.charAt(i));
+                    incrementCaretX();
+                }
+            }
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog
+                    (null, "Can't past text", "ERROR", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
+        }
+    }
+
+    public void cut()
+    {
+        String string = "";
+        for (Line line: lines) {
+            for (Char ch : line.chars) {
+                if (ch.getIsSelect()){
+                    string += ch.getStringCh();
+                }
+            }
+            if (line.chars.size()-1 >= 0 && line.chars.get(line.chars.size()-1).getIsSelect()) string += "\n";
+        }
+        StringSelection data = new StringSelection(string);
+        try {
+            Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+            c.setContents(data,null);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog
+                    (null, "Can't cut text", "ERROR", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package MyText;
+package mytext;
 
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
@@ -9,42 +9,48 @@ import java.util.List;
  */
 public class Line {
 
+    private MainWindow mainWindow;
     private int maxHight;
     private int maxLength;
     private int cordinateY;
-    private int nomberLine;
-    private MainWindow ob;
+    private int numberLine;
+    private TextPanel textPanel;
 
     public List<Char> chars = new LinkedList<Char>();
 
-    public Line(MainWindow ob) {
-        this.ob = ob;
+    public Line(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+        textPanel = mainWindow.textPanel;
         maxHight = 15;
         maxLength = 0;
     }
 
     public void add(char ch) {
-        chars.add(new Char(ch, ob));
+        chars.add(new Char(ch, mainWindow));
     }
 
     public void add(Char ch) {
-        chars.add(new Char(ch, ob));
+        chars.add(new Char(ch, mainWindow));
     }
 
     public void add(String ch, String font, String style, String size) {
-        chars.add(new Char(ch.charAt(0), font, style, size, ob));
+        chars.add(new Char(ch.charAt(0), font, style, size, mainWindow));
     }
 
     public void add(int i, char ch) {
-        chars.add(i, new Char(ch, ob));
+        chars.add(i, new Char(ch, mainWindow));
     }
 
     public void remove(int caretX) {
         chars.remove(caretX-1);
     }
 
+    public int indexOf(Char ch) {
+        return chars.indexOf(ch);
+    }
+
     public Line copySubLine(int x1, int x2){
-        Line newLine = new Line(ob);
+        Line newLine = new Line(mainWindow);
         for (int i = x1; i < x2; i++){
             newLine.add(this.chars.get(i));
         }
@@ -76,14 +82,16 @@ public class Line {
 
     public void setCordinateY(int c) { cordinateY = c; }
 
-    public void setNomberLine(int n) { nomberLine = n; }
+    public void setNumberLine(int number) {
+        this.numberLine = number;
+    }
 
     public void checkEndLine(Point2D p) {
         if (cordinateY-maxHight <= p.getY()){
-            ob.textPanel.setCaretX(chars.size());
-            ob.textPanel.setCaretY(nomberLine);
+            textPanel.setCaretX(chars.size());
+            textPanel.setCaretY(numberLine);
             if (10 >= p.getX()){
-                ob.textPanel.setCaretX(0);
+                textPanel.setCaretX(0);
             }
         }
     }
