@@ -10,17 +10,19 @@ import java.util.List;
 public class Line {
 
     private MainWindow mainWindow;
+    private TextPanel textPanel;
+    private Caret caret;
     private int maxHight;
     private int maxLength;
     private int cordinateY;
     private int numberLine;
-    private TextPanel textPanel;
 
     public List<Char> chars = new LinkedList<Char>();
 
     public Line(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         textPanel = mainWindow.textPanel;
+        caret = textPanel.caret;
         maxHight = 15;
         maxLength = 0;
     }
@@ -88,10 +90,10 @@ public class Line {
 
     public void checkEndLine(Point2D p) {
         if (cordinateY-maxHight <= p.getY()){
-            textPanel.setCaretX(chars.size());
-            textPanel.setCaretY(numberLine);
+            caret.setCaretX(chars.size());
+            caret.setCaretY(numberLine);
             if (10 >= p.getX()){
-                textPanel.setCaretX(0);
+                caret.setCaretX(0);
             }
         }
     }

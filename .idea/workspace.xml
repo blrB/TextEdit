@@ -2,35 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ead6d012-3769-42b8-a75f-ee17096b2101" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mytext/FileWork.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mytext/MainWindow.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mytext/TextMouseHandler.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/Char.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/Line.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/MainWindow.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/TextCaretTimer$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/TextCaretTimer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/TextKeyListener.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/TextMenuBar.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/TextMouseHandler.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/TextPanel.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/TextScrollPanelListener.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/TextToolBar.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/TextToolBarBoxListener.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/MyText/TextToolBarButtonListener.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/MyText/MainWindow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/MyText/TextMenuBar.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/MyText/TextMouseHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/MyText/TextScrollPanelListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/MyText/TextToolBar.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/MyText/TextToolBarBoxListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/MyText/TextToolBarButtonListener.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/MyText/Char.java" afterPath="$PROJECT_DIR$/src/mytext/Char.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/MyText/Line.java" afterPath="$PROJECT_DIR$/src/mytext/Line.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/MyText/TextCaretTimer.java" afterPath="$PROJECT_DIR$/src/mytext/TextCaretTimer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/MyText/TextKeyListener.java" afterPath="$PROJECT_DIR$/src/mytext/TextKeyListener.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/MyText/TextPanel.java" afterPath="$PROJECT_DIR$/src/mytext/TextPanel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mytext/Caret.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mytext/CaretKeyListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mytext/ControlKeyListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mytext/DeleteKeyListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mytext/ShiftKeyListener.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/JText/MainWindow.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/JText/TextCaret.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/JText/TextMenuBar.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/JText/TextPanel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/JText/TextToolBar.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/JText/TextToolBarBoxListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/JText/TextToolBarButtonListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/TextCaretTimer$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/TextCaretTimer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/JText/MainWindow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/JText/TextCaret.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/JText/TextMenuBar.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/JText/TextPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/JText/TextToolBar.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/JText/TextToolBarBoxListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/JText/TextToolBarButtonListener.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/mytext/TextCaretTimer.java" afterPath="$PROJECT_DIR$/src/mytext/CaretTimer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/Char.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/Char.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/FileWork.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/FileWork.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/Line.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/Line.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$1.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$10.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$10.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$11.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$11.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$2.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$3.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$4.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$5.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$6.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$7.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$8.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$8.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$9.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow$9.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/MainWindow.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/TextKeyListener.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/TextKeyListener.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/TextMouseHandler.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/TextMouseHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TextEdit/mytext/TextPanel.class" afterPath="$PROJECT_DIR$/out/production/TextEdit/mytext/TextPanel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mytext/Char.java" afterPath="$PROJECT_DIR$/src/mytext/Char.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mytext/FileWork.java" afterPath="$PROJECT_DIR$/src/mytext/FileWork.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mytext/Line.java" afterPath="$PROJECT_DIR$/src/mytext/Line.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mytext/MainWindow.java" afterPath="$PROJECT_DIR$/src/mytext/MainWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mytext/TextKeyListener.java" afterPath="$PROJECT_DIR$/src/mytext/TextKeyListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mytext/TextMouseHandler.java" afterPath="$PROJECT_DIR$/src/mytext/TextMouseHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mytext/TextPanel.java" afterPath="$PROJECT_DIR$/src/mytext/TextPanel.java" />
     </list>
     <ignored path="TextEdit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,48 +75,25 @@
         <entry file="file://$PROJECT_DIR$/src/mytext/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+              <caret line="137" column="57" selection-start-line="137" selection-start-column="57" selection-end-line="137" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#createToolBar#0;class#MainWindow#0" expanded="false" />
                 <element signature="method#makeButton#0;class#MainWindow#0" expanded="false" />
-                <element signature="method#updateWindow#0;class#MainWindow#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Line.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/mytext/Line.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36666667">
-              <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileWork.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mytext/FileWork.java">
+      <file leaf-file-name="CaretKeyListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mytext/CaretKeyListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="116" column="53" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="25" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TextCaretTimer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mytext/TextCaretTimer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#259#260#0" expanded="true" />
+                <element signature="e#309#310#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,9 +103,23 @@
         <entry file="file://$PROJECT_DIR$/src/mytext/TextKeyListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="45" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ControlKeyListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mytext/ControlKeyListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#271#272#0" expanded="true" />
+                <element signature="e#319#320#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -119,8 +129,32 @@
         <entry file="file://$PROJECT_DIR$/src/mytext/TextMouseHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <caret line="60" column="54" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="54" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Caret.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mytext/Caret.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="91" column="16" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DeleteKeyListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mytext/DeleteKeyListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -129,7 +163,7 @@
         <entry file="file://$PROJECT_DIR$/src/mytext/Char.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+              <caret line="128" column="48" selection-start-line="128" selection-start-column="48" selection-end-line="128" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -137,11 +171,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TextPanel.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TextPanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mytext/TextPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.4857143">
+              <caret line="353" column="22" selection-start-line="353" selection-start-column="22" selection-end-line="353" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -149,12 +183,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProtectionDomain.class" pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/security/ProtectionDomain.class">
+      <file leaf-file-name="ShiftKeyListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mytext/ShiftKeyListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
-              <folding />
+              <caret line="23" column="61" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -204,25 +240,31 @@
         <option value="$PROJECT_DIR$/src/MyText/TextMouseHandler.java" />
         <option value="$PROJECT_DIR$/src/MyText/Char.java" />
         <option value="$PROJECT_DIR$/src/MyText/TextPanel.java" />
-        <option value="$PROJECT_DIR$/src/mytext/TextCaretTimer.java" />
         <option value="$PROJECT_DIR$/src/mytext/TextToolBar.java" />
         <option value="$PROJECT_DIR$/src/mytext/TextToolBarBoxListener.java" />
         <option value="$PROJECT_DIR$/src/mytext/TextMenuBar.java" />
-        <option value="$PROJECT_DIR$/src/mytext/FileWork.java" />
-        <option value="$PROJECT_DIR$/src/mytext/TextKeyListener.java" />
-        <option value="$PROJECT_DIR$/src/mytext/Char.java" />
-        <option value="$PROJECT_DIR$/src/mytext/TextMouseHandler.java" />
-        <option value="$PROJECT_DIR$/src/mytext/TextPanel.java" />
-        <option value="$PROJECT_DIR$/src/mytext/MainWindow.java" />
         <option value="$PROJECT_DIR$/src/mytext/Line.java" />
+        <option value="$PROJECT_DIR$/src/mytext/TextMouseHandler.java" />
+        <option value="$PROJECT_DIR$/src/mytext/TextCaretTimer.java" />
+        <option value="$PROJECT_DIR$/src/mytext/Caret.java" />
+        <option value="$PROJECT_DIR$/src/mytext/TextKeyListener.java" />
+        <option value="$PROJECT_DIR$/src/mytext/CaretTimer.java" />
+        <option value="$PROJECT_DIR$/src/mytext/ControlKeyListener.java" />
+        <option value="$PROJECT_DIR$/src/mytext/FileWork.java" />
+        <option value="$PROJECT_DIR$/src/mytext/DeleteKeyListener.java" />
+        <option value="$PROJECT_DIR$/src/mytext/MainWindow.java" />
+        <option value="$PROJECT_DIR$/src/mytext/CaretKeyListener.java" />
+        <option value="$PROJECT_DIR$/src/mytext/Char.java" />
+        <option value="$PROJECT_DIR$/src/mytext/ShiftKeyListener.java" />
+        <option value="$PROJECT_DIR$/src/mytext/TextPanel.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-4" />
+    <option name="y" value="24" />
     <option name="width" value="1301" />
-    <option name="height" value="772" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -249,9 +291,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -288,22 +327,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TextEdit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TextEdit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -628,8 +656,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
-    <editor active="false" />
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -645,13 +673,13 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24980783" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24980783" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24980783" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3283582" sideWeight="0.49423522" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24980783" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -668,39 +696,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/mytext/TextMouseHandler.java</url>
-          <line>33</line>
-          <properties />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/mytext/TextMouseHandler.java</url>
-          <line>19</line>
-          <properties />
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/mytext/TextMouseHandler.java</url>
-          <line>18</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/mytext/TextMouseHandler.java</url>
-          <line>22</line>
-          <properties class="mytext.TextMouseHandler" method="mouseClicked" />
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/mytext/TextMouseHandler.java</url>
-          <line>17</line>
-          <properties class="mytext.TextMouseHandler" method="&lt;init&gt;" />
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="25" />
+      <option name="time" value="48" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -709,7 +705,230 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/mytext/TextCaretTimer.java">
+    <entry file="file://$PROJECT_DIR$/src/mytext/CaretTimer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextKeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextMouseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/Char.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="89" selection-start-line="35" selection-start-column="89" selection-end-line="35" selection-end-column="89" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/security/ProtectionDomain.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#createToolBar#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#makeButton#0;class#MainWindow#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/Line.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/FileWork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="53" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/CaretTimer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextKeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextMouseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/Char.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="89" selection-start-line="35" selection-start-column="89" selection-end-line="35" selection-end-column="89" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/security/ProtectionDomain.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#createToolBar#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#makeButton#0;class#MainWindow#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/Line.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/FileWork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="53" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/CaretTimer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextKeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextMouseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/Char.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/security/ProtectionDomain.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/CaretTimer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="43" />
@@ -757,174 +976,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mytext/TextCaretTimer.java">
+    <entry file="file://$PROJECT_DIR$/src/mytext/CaretTimer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextCaret.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextMenuBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBarButtonListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextCaret.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextCaret.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBarButtonListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="45" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextCaret.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBarButtonListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="45" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextMenuBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextMenuBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -956,34 +1014,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="1" selection-start-line="33" selection-start-column="5" selection-end-line="34" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextCaret.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3">
-          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="51" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/javax/swing/JComponent.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="9.962069">
-          <caret line="426" column="61" selection-start-line="426" selection-start-column="57" selection-end-line="426" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/awt/KeyEventDispatcher.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32225063">
@@ -991,46 +1021,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBarBoxListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextMenuBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="29" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JText/TextToolBarButtonListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0857143">
-          <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/security/ProtectionDomain.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mytext/TextKeyListener.java">
+    <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/util/TimerThread.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.4827585">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/javax/swing/JComponent.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35805628">
+          <caret line="401" column="19" selection-start-line="401" selection-start-column="19" selection-end-line="401" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/Line.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="45" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
+          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/CaretTimer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1040,27 +1065,48 @@
     <entry file="file://$PROJECT_DIR$/src/mytext/FileWork.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="116" column="53" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
+          <caret line="90" column="60" selection-start-line="90" selection-start-column="60" selection-end-line="90" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/DeleteKeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mytext/Char.java">
+    <entry file="file://$PROJECT_DIR$/src/mytext/ControlKeyListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#271#272#0" expanded="true" />
+            <element signature="e#319#320#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mytext/TextCaretTimer.java">
+    <entry file="file://$PROJECT_DIR$/src/mytext/CaretKeyListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="43" />
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="25" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#259#260#0" expanded="true" />
+            <element signature="e#309#310#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextKeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1070,15 +1116,25 @@
     <entry file="file://$PROJECT_DIR$/src/mytext/TextMouseHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <caret line="60" column="54" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mytext/TextPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/mytext/Char.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="29" />
+          <caret line="128" column="48" selection-start-line="128" selection-start-column="48" selection-end-line="128" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/Caret.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="16" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1088,20 +1144,29 @@
     <entry file="file://$PROJECT_DIR$/src/mytext/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+          <caret line="137" column="57" selection-start-line="137" selection-start-column="57" selection-end-line="137" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#createToolBar#0;class#MainWindow#0" expanded="false" />
             <element signature="method#makeButton#0;class#MainWindow#0" expanded="false" />
-            <element signature="method#updateWindow#0;class#MainWindow#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mytext/Line.java">
+    <entry file="file://$PROJECT_DIR$/src/mytext/ShiftKeyListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36666667">
-          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="61" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mytext/TextPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4857143">
+          <caret line="353" column="22" selection-start-line="353" selection-start-column="22" selection-end-line="353" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

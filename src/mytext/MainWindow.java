@@ -24,28 +24,14 @@ public class MainWindow {
         frame.setJMenuBar(createFileMenu());
         frame.add(createToolBar(), BorderLayout.PAGE_START);
         textPanel = new TextPanel(this);
-        Line newLine = new Line(this);
-        textPanel.lines.add(newLine);
         scrollPanel = new JScrollPane(textPanel);
-        TextMouseHandler textmousehandler = new TextMouseHandler(this);
-        textPanel.addMouseListener(textmousehandler);
-        textPanel.addMouseMotionListener(textmousehandler);
-        scrollPanel.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
-            public void adjustmentValueChanged(AdjustmentEvent evt) {
-                updateWindow();
-            }
-        });
-        scrollPanel.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
-            public void adjustmentValueChanged(AdjustmentEvent evt) {
-                updateWindow();
-            }
-        });
+        textPanel.createInput();
         fileWork = new FileWork(this);
         frame.add(scrollPanel, BorderLayout.CENTER);
-        frame.addKeyListener(new TextKeyListener(this));
         frame.setSize(800,600);
         frame.setFocusable(true);
         frame.setVisible(true);
+        addListener();
     }
 
     private JMenuBar createFileMenu() {
@@ -130,6 +116,27 @@ public class MainWindow {
         ImageIcon img = new ImageIcon(patch);
         button.setIcon(img);
         return button;
+    }
+
+    private void addListener(){
+        TextMouseHandler textmousehandler = new TextMouseHandler(this);
+        textPanel.addMouseListener(textmousehandler);
+        textPanel.addMouseMotionListener(textmousehandler);
+        scrollPanel.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+            public void adjustmentValueChanged(AdjustmentEvent evt) {
+                updateWindow();
+            }
+        });
+        scrollPanel.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+            public void adjustmentValueChanged(AdjustmentEvent evt) {
+                updateWindow();
+            }
+        });
+        frame.addKeyListener(new CaretKeyListener(this));
+        frame.addKeyListener(new ControlKeyListener(this));
+        frame.addKeyListener(new DeleteKeyListener(this));
+        frame.addKeyListener(new ShiftKeyListener(this));
+        frame.addKeyListener(new TextKeyListener(this));
     }
 
     public void updateWindow() {

@@ -1,18 +1,8 @@
 package mytext;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import javax.xml.stream.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -23,10 +13,12 @@ public class FileWork {
 
     private MainWindow mainWindow;
     private TextPanel textPanel;
+    private Caret caret;
 
     public FileWork(MainWindow mainWindow){
         this.mainWindow = mainWindow;
         textPanel = mainWindow.textPanel;
+        caret = textPanel.caret;
     }
 
     public void openFile(){
@@ -47,31 +39,64 @@ public class FileWork {
         try {
             JFileChooser fc = new JFileChooser();
             if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-                DocumentBuilder builder = null;
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                builder = factory.newDocumentBuilder();
-                Document doc = builder.newDocument();
-                Element textXML = doc.createElement("text");
-                for (Line line: textPanel.lines) {
-                    Element lineXML = doc.createElement("line");
+                XMLOutputFactory output = XMLOutputFactory.newInstance();
+                XMLStreamWriter writer = output.createXMLStreamWriter
+                        (new FileWriter(fc.getSelectedFile() + ".mytext"));
+                writer.writeStartDocument("UTF-8", "1.0");
+                writer.writeStartElement("text");
+                for (Line line : textPanel.lines) {
+                    writer.writeStartElement("line");
                     for (Char ch : line.chars) {
-                        Element chXML = doc.createElement("char");
-                        chXML.setAttribute("font", ch.getFontType());
-                        chXML.setAttribute("style", Integer.toString(ch.getFontStyles()));
-                        chXML.setAttribute("size", Integer.toString(ch.getFontSize()));
-                        chXML.appendChild(doc.createTextNode(ch.getStringCh()));
-                        lineXML.appendChild(chXML);
+                        writer.writeStartElement("char");
+                        writer.writeAttribute("font", ch.getFontType());
+                        writer.writeAttribute("style", Integer.toString(ch.getFontStyles()));
+                        writer.writeAttribute("size", Integer.toString(ch.getFontSize()));
+                        writer.writeCharacters(ch.getStringCh());
+                        writer.writeEndElement();
                     }
-                    textXML.appendChild(lineXML);
+                    writer.writeEndElement();
                 }
-                doc.appendChild(textXML);
-                Transformer t = TransformerFactory.newInstance().newTransformer();
-                t.transform(new DOMSource(doc),
-                        new StreamResult(new FileOutputStream(fc.getSelectedFile() + ".mytext")));
+                writer.writeEndElement();
+                writer.writeEndDocument();
+                writer.flush();
             }
         } catch (Exception eSave) {
             JOptionPane.showMessageDialog
                     (null, "Can't save file", "ERROR", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
+        }
+    }
+
+    public void openXMLFile(String fileName){
+        try {
+            Line newLine = new Line(mainWindow);
+            textPanel.lines = new ArrayList<Line>();
+            caret.setCaretX(0);
+            caret.setCaretY(0);
+            XMLStreamReader xmlr = XMLInputFactory.newInstance()
+                    .createXMLStreamReader(fileName, new FileInputStream(fileName));
+            while (xmlr.hasNext()) {
+                xmlr.next();
+                if (xmlr.isStartElement()) {
+                    if (xmlr.getLocalName().equals("line")){
+                        newLine = new Line(mainWindow);
+                    }
+                    else if (xmlr.getLocalName().equals("char")){
+                        String font = xmlr.getAttributeValue(null, "font");
+                        String size = xmlr.getAttributeValue(null, "size");
+                        String style = xmlr.getAttributeValue(null, "style");
+                        xmlr.next();
+                        newLine.add(xmlr.getText(), font, style, size);
+                    }
+                } else if (xmlr.isEndElement()) {
+                    if (xmlr.getLocalName().equals("line")){
+                        textPanel.lines.add(newLine);
+                    }
+                }
+            }
+            mainWindow.updateWindow();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog
+                    (null, "Can't open file", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -80,8 +105,8 @@ public class FileWork {
             BufferedReader reader = new BufferedReader( new FileReader(fileName));
             String line = null;
             textPanel.lines = new ArrayList<Line>();
-            textPanel.setCaretX(0);
-            textPanel.setCaretY(0);
+            caret.setCaretX(0);
+            caret.setCaretY(0);
             while( ( line = reader.readLine() ) != null ) {
                 Line newLine = new Line(mainWindow);
                 char [] newCharArray = line.toCharArray ();
@@ -93,42 +118,6 @@ public class FileWork {
             mainWindow.updateWindow();
         }
         catch ( IOException e ) {
-            JOptionPane.showMessageDialog
-                    (null, "Can't open file", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public void openXMLFile(String fileName){
-        try {
-            //STaX, SAX
-            File xmlFile = new File(fileName);
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(xmlFile);
-            doc.getDocumentElement().normalize();
-            NodeList nodeList = doc.getElementsByTagName("line");
-            textPanel.lines = new ArrayList<Line>();
-            textPanel.setCaretX(0);
-            textPanel.setCaretY(0);
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Line newLine = new Line(mainWindow);
-                Node node = nodeList.item(i);
-                if (Node.ELEMENT_NODE == node.getNodeType()) {
-                    Element element = (Element) node;
-                    NodeList charList = element.getElementsByTagName("char");
-                    for (int y = 0; y < charList.getLength(); y++) {
-                        Element ch = (Element) charList.item(y);
-                        newLine.add(ch.getTextContent(),
-                                ch.getAttribute("font"),
-                                ch.getAttribute("style"),
-                                ch.getAttribute("size"));
-                    }
-                }
-                textPanel.lines.add(newLine);
-            }
-            mainWindow.updateWindow();
-        }
-        catch(Exception eOpen){
             JOptionPane.showMessageDialog
                     (null, "Can't open file", "ERROR", JOptionPane.ERROR_MESSAGE);
         }

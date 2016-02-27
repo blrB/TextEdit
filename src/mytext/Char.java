@@ -8,27 +8,26 @@ import java.awt.geom.Point2D;
  */
 public class Char{
 
-    //private MainWindow mainWindow;
     private TextPanel textPanel;
+    private Caret caret;
+    private Font font;
+    private Boolean isSelect;
     private char ch;
     private int height;
     private int wight;
     private int x;
     private int y;
     private int fontStyle;
-    private Font font;
-    private Boolean isSelect;
 
     public Char(char ch, MainWindow mainWindow){
-        //this.mainWindow = mainWindow;
         textPanel = mainWindow.textPanel;
+        caret = textPanel.caret;
         this.ch = ch;
         isSelect = false;
         font = getPrevFont();
     }
 
     public Char(Char ch, MainWindow mainWindow) {
-        //this.mainWindow = mainWindow;
         textPanel = mainWindow.textPanel;
         this.ch = ch.getCharCh();
         this.font = ch.getFont();
@@ -37,7 +36,6 @@ public class Char{
     }
 
     public Char(char ch, String font, String style, String size, MainWindow mainWindow) {
-        //this.mainWindow = mainWindow;
         textPanel = mainWindow.textPanel;
         this.ch = ch;
         this.font = new Font(font, Integer.parseInt(style) , Integer.parseInt(size));
@@ -70,7 +68,7 @@ public class Char{
     }
 
     public void setFontType(String type){
-        font = new Font(type, getFontStyles(), font.getSize());
+        font = new Font(type, getFontStyles(), getFontSize());
     }
 
     public void setFontStyles(int style){
@@ -94,17 +92,17 @@ public class Char{
     }
 
     public Font getPrevFont(){
-        if (textPanel.getCaretX() == 0 && textPanel.getCaretY() == 0){
+        if (caret.getCaretX() == 0 && caret.getCaretY() == 0){
             return new Font(Font.MONOSPACED, 0 , 12);
         } else {
-            if (textPanel.lines.get(textPanel.getCaretY()).size() != 0
-                    && textPanel.getCaretX() != 0) {
-                Char prevCh = textPanel.lines.get(textPanel.getCaretY())
-                        .chars.get(textPanel.getCaretX() - 1);
+            if (textPanel.lines.get(caret.getCaretY()).size() != 0
+                    && caret.getCaretX() != 0) {
+                Char prevCh = textPanel.lines.get(caret.getCaretY())
+                        .chars.get(caret.getCaretX() - 1);
                 fontStyle = prevCh.getFontStyles();
                 return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
             } else {
-                int i = textPanel.getCaretY();
+                int i = caret.getCaretY();
                 while (textPanel.lines.get(i - 1).size() == 0 && i > 0) i--;
                 Char prevCh = textPanel.lines.get(i - 1)
                         .chars.get(textPanel.lines.get(i - 1).chars.size() - 1);
@@ -115,7 +113,7 @@ public class Char{
     }
 
     public void setFontSize(int size){
-        font = new Font(font.getFontName(), getFontStyles(), size);
+        font = new Font(getFontType(), getFontStyles(), size);
     }
 
     public boolean contains(Point2D p){
@@ -128,7 +126,7 @@ public class Char{
         Point leftPoint = (one.getX() < two.getX()) ? one : two;
         Point rightPoint = (one.getX() < two.getX()) ? two : one;
 
-        if (y < downPoint.getY() || y-height > upPoint.getY()) {
+        if (y <= downPoint.getY() || y-height >= upPoint.getY()) {
             return ((x >= upPoint.getX()) && y - height < upPoint.getY() && y >= upPoint.getY() ||
                     (x <= downPoint.getX()) && y - height <= downPoint.getY() && y >= downPoint.getY() ||
                     (y - height >= upPoint.getY() && y <= downPoint.getY()));
