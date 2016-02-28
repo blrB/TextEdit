@@ -18,6 +18,7 @@ public class Char{
     private int x;
     private int y;
     private int fontStyle;
+    private int numberLine;
 
     public Char(char ch, MainWindow mainWindow){
         textPanel = mainWindow.textPanel;
@@ -29,6 +30,7 @@ public class Char{
 
     public Char(Char ch, MainWindow mainWindow) {
         textPanel = mainWindow.textPanel;
+        caret = textPanel.caret;
         this.ch = ch.getCharCh();
         this.font = ch.getFont();
         this.isSelect = ch.getIsSelect();
@@ -37,6 +39,7 @@ public class Char{
 
     public Char(char ch, String font, String style, String size, MainWindow mainWindow) {
         textPanel = mainWindow.textPanel;
+        caret = textPanel.caret;
         this.ch = ch;
         this.font = new Font(font, Integer.parseInt(style) , Integer.parseInt(size));
         this.isSelect = false;
@@ -121,20 +124,24 @@ public class Char{
     }
 
     public boolean contains(Point one, Point two) {
+        int height = textPanel.lines.get(numberLine).getMaxHight();
         Point upPoint = (one.getY() < two.getY()) ? one : two;
         Point downPoint = (one.getY() < two.getY()) ? two : one;
         Point leftPoint = (one.getX() < two.getX()) ? one : two;
         Point rightPoint = (one.getX() < two.getX()) ? two : one;
-
-        if (y <= downPoint.getY() || y-height >= upPoint.getY()) {
+        if (y < downPoint.getY() || y-height > upPoint.getY()) {
             return ((x >= upPoint.getX()) && y - height < upPoint.getY() && y >= upPoint.getY() ||
-                    (x <= downPoint.getX()) && y - height <= downPoint.getY() && y >= downPoint.getY() ||
-                    (y - height >= upPoint.getY() && y <= downPoint.getY()));
+                    (x <= downPoint.getX()) && y - height < downPoint.getY() && y >= downPoint.getY() ||
+                    (y - height >= upPoint.getY() && y < downPoint.getY()));
         } else {
             return (y-height <= leftPoint.getY() && y >= leftPoint.getY()) &&
                     (y-height <= rightPoint.getY() && y >= rightPoint.getY()) &&
                     (x > leftPoint.getX() && x <= rightPoint.getX());
         }
+    }
+
+    public void setNumberLine(int number){
+        numberLine = number;
     }
 
     public void setIsSelect(boolean selected){ isSelect = selected;}

@@ -65,7 +65,7 @@ public class TextPanel  extends JComponent{
                 if (ch.getIsSelect()) {
                     graphics2d.setColor(Color.gray);
                     Rectangle2D rect = new Rectangle
-                            (x, y - fm.getHeight() + 3,fm.stringWidth(ch.getStringCh()), fm.getHeight() - 1);
+                            (x, y-line.getMaxHight()+3, fm.stringWidth(ch.getStringCh()), line.getMaxHight()-1);
                     graphics2d.fill(rect);
                     graphics2d.setColor(Color.blue);
                 }
@@ -74,6 +74,7 @@ public class TextPanel  extends JComponent{
                 ch.setWight(fm.stringWidth(ch.getStringCh()));
                 ch.setX(x);
                 ch.setY(y);
+                ch.setNumberLine(lineY);
                 x += fm.stringWidth(ch.getStringCh())+1;
                 if (caret.getCaretX() == letterX && caret.getCaretY()  == lineY){
                     caret.setCaretCordinateX(x);
@@ -365,4 +366,31 @@ public class TextPanel  extends JComponent{
         caret.incrementCaretY();
     }
 
+    public void click(Point point) {
+        for (Line line : lines) {
+            line.checkEndLine(point);
+            for (Char ch : line.chars) {
+                if (ch.contains(point)) {
+                    caret.setCaretY(lines.indexOf(line));
+                    caret.setCaretX(line.indexOf(ch) + 1);
+                }
+            }
+        }
+        mainWindow.updateWindow();
+    }
+
+
+    public void click(Point one, Point two) {
+        for (Line line : lines) {
+            line.checkEndLine(two);
+            for (Char ch : line.chars) {
+                ch.setIsSelect(ch.contains(one, two));
+                if (ch.contains(two)) {
+                    caret.setCaretY(lines.indexOf(line));
+                    caret.setCaretX(line.indexOf(ch) + 1);
+                }
+            }
+        }
+        mainWindow.updateWindow();
+    }
 }
