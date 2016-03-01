@@ -11,7 +11,7 @@ public class CaretTimer {
     private Caret caret;
 
     public CaretTimer(TextPanel textPanel) {
-        caret = textPanel.caret;
+        caret = textPanel.getCaret();
         final Timer time = new Timer();
         time.schedule(new TimerTask() {
             public void run() {

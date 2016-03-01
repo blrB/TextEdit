@@ -11,7 +11,7 @@ public class ControlKeyListener implements KeyListener {
     private TextPanel textPanel;
 
     public ControlKeyListener(MainWindow mainWindow){
-        textPanel = mainWindow.textPanel;
+        textPanel = mainWindow.getTextPanel();
     }
 
     public void keyPressed(KeyEvent keyEvent) {

@@ -14,9 +14,9 @@ import java.util.Arrays;
 public class MainWindow {
 
     private FileWork fileWork;
-    public TextPanel textPanel;
-    public JFrame frame;
-    public JScrollPane scrollPanel;
+    private TextPanel textPanel;
+    private JFrame frame;
+    private JScrollPane scrollPanel;
 
     public MainWindow() {
         frame = new JFrame("Text Edit");
@@ -145,8 +145,20 @@ public class MainWindow {
         frame.requestFocus();
     }
 
+    public TextPanel getTextPanel(){
+        return textPanel;
+    }
+
+    public JFrame getFrame(){
+        return frame;
+    }
+
+    public JScrollPane getScrollPanel(){
+        return scrollPanel;
+    }
+
     public static void main(String[] args){
-        MainWindow mainWinow = new MainWindow();
+        new MainWindow();
     }
 
 }

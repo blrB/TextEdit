@@ -11,7 +11,7 @@ public class ShiftKeyListener implements KeyListener {
     private TextPanel textPanel;
 
     public ShiftKeyListener(MainWindow mainWindow){
-        textPanel = mainWindow.textPanel;
+        textPanel = mainWindow.getTextPanel();
     }
 
     public void keyPressed(KeyEvent keyEvent) {

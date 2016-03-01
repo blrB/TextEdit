@@ -17,8 +17,8 @@ public class FileWork {
 
     public FileWork(MainWindow mainWindow){
         this.mainWindow = mainWindow;
-        textPanel = mainWindow.textPanel;
-        caret = textPanel.caret;
+        textPanel = mainWindow.getTextPanel();
+        caret = textPanel.getCaret();
     }
 
     public void openFile(){
@@ -44,9 +44,9 @@ public class FileWork {
                         (new FileWriter(fc.getSelectedFile() + ".mytext"));
                 writer.writeStartDocument("UTF-8", "1.0");
                 writer.writeStartElement("text");
-                for (Line line : textPanel.lines) {
+                for (Line line : textPanel.getLine()) {
                     writer.writeStartElement("line");
-                    for (Char ch : line.chars) {
+                    for (Char ch : line.getChars()) {
                         writer.writeStartElement("char");
                         writer.writeAttribute("font", ch.getFontType());
                         writer.writeAttribute("style", Integer.toString(ch.getFontStyles()));
@@ -69,7 +69,7 @@ public class FileWork {
     public void openXMLFile(String fileName){
         try {
             Line newLine = new Line(mainWindow);
-            textPanel.lines = new ArrayList<Line>();
+            textPanel.setLine(new ArrayList<Line>());
             caret.setCaretX(0);
             caret.setCaretY(0);
             XMLStreamReader xmlr = XMLInputFactory.newInstance()
@@ -89,7 +89,7 @@ public class FileWork {
                     }
                 } else if (xmlr.isEndElement()) {
                     if (xmlr.getLocalName().equals("line")){
-                        textPanel.lines.add(newLine);
+                        textPanel.getLine().add(newLine);
                     }
                 }
             }
@@ -104,7 +104,7 @@ public class FileWork {
         try  {
             BufferedReader reader = new BufferedReader( new FileReader(fileName));
             String line = null;
-            textPanel.lines = new ArrayList<Line>();
+            textPanel.setLine(new ArrayList<Line>());
             caret.setCaretX(0);
             caret.setCaretY(0);
             while( ( line = reader.readLine() ) != null ) {
@@ -113,7 +113,7 @@ public class FileWork {
                 for (char ch: newCharArray){
                     newLine.add(ch);
                 }
-                textPanel.lines.add(newLine);
+                textPanel.getLine().add(newLine);
             }
             mainWindow.updateWindow();
         }

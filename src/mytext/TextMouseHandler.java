@@ -13,7 +13,7 @@ public class TextMouseHandler extends MouseInputAdapter {
     private TextPanel textPanel;
 
     public TextMouseHandler(MainWindow mainWindow){
-        textPanel = mainWindow.textPanel;
+        textPanel = mainWindow.getTextPanel();
     }
 
     public void mouseClicked(MouseEvent e) {

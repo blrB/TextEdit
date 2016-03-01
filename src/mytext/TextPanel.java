@@ -17,30 +17,19 @@ import java.util.List;
 public class TextPanel  extends JComponent{
 
     private MainWindow mainWindow;
-    public List<Line> lines = new ArrayList<Line>();
-    public Caret caret;
-    public String availableKey = "АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя"
-            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
-            + " !\"#$%&'()*+,-./0123456789:;<=>?@¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾"
-            + "¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ";
+    private Caret caret;
+    private List<Line> lines = new ArrayList<Line>();
 
     public TextPanel(MainWindow mainWindow){
         this.mainWindow = mainWindow;
         setLayout(new BorderLayout());
     }
 
-    public void createInput(){
-        caret = new Caret(mainWindow);
-        CaretTimer caretTimer = new CaretTimer(this);
-        Line newLine = new Line(mainWindow);
-        lines.add(newLine);
-    }
-
     protected void paintComponent(Graphics graphics) {
         Graphics2D graphics2d = (Graphics2D) graphics;
         for (Line line: lines) {
             line.setMaxHightNumber(0);
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 Font f = new Font(ch.getFontType(), ch.getFontStyles(), ch.getFontSize());
                 graphics2d.setFont(f);
                 FontMetrics fm = graphics2d.getFontMetrics();
@@ -56,7 +45,7 @@ public class TextPanel  extends JComponent{
             int x=10;
             lineY++;
             int letterX=0;
-            for (Char ch: line.chars) {
+            for (Char ch: line.getChars()) {
                 letterX++;
                 graphics2d.setColor(Color.BLACK);
                 Font f = new Font(ch.getFontType(), ch.getFontStyles(), ch.getFontSize());
@@ -93,6 +82,25 @@ public class TextPanel  extends JComponent{
         setPreferredSize(new Dimension(xMax + 50, y + 50));
     }
 
+    public Caret getCaret(){
+        return caret;
+    }
+
+    public List<Line> getLine(){
+        return lines;
+    }
+
+    public void setLine(ArrayList<Line> lines) {
+        this.lines = lines;
+    }
+
+    public void createInput(){
+        caret = new Caret(mainWindow);
+        CaretTimer caretTimer = new CaretTimer(this);
+        Line newLine = new Line(mainWindow);
+        lines.add(newLine);
+    }
+
     public void newLine() {
         int lost = caret.getCaretX();
         Line newLine = lines.get(caret.getCaretY()).copySubLine
@@ -108,8 +116,8 @@ public class TextPanel  extends JComponent{
         } else if (caret.getCaretX()==0){
             caret.setCaretX(lines.get(caret.getCaretY()-1).size());
             if (lines.get(caret.getCaretY()).size() != 0){
-                for (Char ch: lines.get(caret.getCaretY()).chars){
-                    lines.get(caret.getCaretY()-1).chars.add(ch);
+                for (Char ch: lines.get(caret.getCaretY()).getChars()){
+                    lines.get(caret.getCaretY()-1).getChars().add(ch);
                 }
             }
             lines.remove(caret.getCaretY());
@@ -121,12 +129,12 @@ public class TextPanel  extends JComponent{
     }
 
     public void deleteNextChar() {
-        if (caret.getCaretX()==lines.get(caret.getCaretY()).chars.size() &&
+        if (caret.getCaretX()==lines.get(caret.getCaretY()).getChars().size() &&
                 caret.getCaretY()==lines.size()-1){
-        } else if (caret.getCaretX()==lines.get(caret.getCaretY()).chars.size()){
+        } else if (caret.getCaretX()==lines.get(caret.getCaretY()).getChars().size()){
             if (lines.get(caret.getCaretY()+1).size() != 0){
-                for (Char ch: lines.get(caret.getCaretY()+1).chars){
-                    lines.get(caret.getCaretY()).chars.add(ch);
+                for (Char ch: lines.get(caret.getCaretY()+1).getChars()){
+                    lines.get(caret.getCaretY()).getChars().add(ch);
                 }
             }
             lines.remove(caret.getCaretY()+1);
@@ -139,7 +147,7 @@ public class TextPanel  extends JComponent{
         JComboBox cb = (JComboBox)e.getSource();
         String change = (String) cb.getSelectedItem();
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()) {
                     ch.setFontSize(Integer.parseInt(change));
                 }
@@ -152,7 +160,7 @@ public class TextPanel  extends JComponent{
         JComboBox cb = (JComboBox)e.getSource();
         String change = (String) cb.getSelectedItem();
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()) {
                     ch.setFontType(change);
                 }
@@ -164,7 +172,7 @@ public class TextPanel  extends JComponent{
     public void changeStyleOnBold(){
         boolean bold = false, notBold = false;
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()) {
                     if (ch.getFontStyles() == 0 || ch.getFontStyles() == 2) notBold = true;
                     if (ch.getFontStyles() == 1 || ch.getFontStyles() == 3) bold = true;
@@ -172,7 +180,7 @@ public class TextPanel  extends JComponent{
             }
         }
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()) {
                     if (bold && notBold) ch.setNormalizationBold();
                     else ch.setFontStyles(1);
@@ -185,7 +193,7 @@ public class TextPanel  extends JComponent{
     public void changeStyleOnItalic(){
         boolean italic = false, notItalic = false;
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()){
                     if (ch.getFontStyles() == 0 || ch.getFontStyles() == 1) notItalic = true;
                     if (ch.getFontStyles() == 2 || ch.getFontStyles() == 3) italic = true;
@@ -193,7 +201,7 @@ public class TextPanel  extends JComponent{
             }
         }
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()){
                     if (italic && notItalic) ch.setNormalizationItalic();
                     else ch.setFontStyles(2);
@@ -206,12 +214,14 @@ public class TextPanel  extends JComponent{
     public void copy() {
         String string = "";
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()){
                     string += ch.getStringCh();
                 }
             }
-            if (line.chars.size()-1 >= 0 && line.chars.get(line.chars.size()-1).getIsSelect()) string += "\n";
+            if (line.getChars().size()-1 >= 0 && line.getChars().get(line.getChars().size()-1).getIsSelect()) {
+                string += "\n";
+            }
         }
         StringSelection data = new StringSelection(string);
         try {
@@ -245,12 +255,14 @@ public class TextPanel  extends JComponent{
     public void cut() {
         String string = "";
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()){
                     string += ch.getStringCh();
                 }
             }
-            if (line.chars.size()-1 >= 0 && line.chars.get(line.chars.size()-1).getIsSelect()) string += "\n";
+            if (line.getChars().size()-1 >= 0 && line.getChars().get(line.getChars().size()-1).getIsSelect()){
+                string += "\n";
+            }
         }
         StringSelection data = new StringSelection(string);
         try {
@@ -267,8 +279,8 @@ public class TextPanel  extends JComponent{
         boolean setCaret = true;
         for (int y = lines.size() - 1; y >= 0; y--) {
             if (!setCaret && caret.getCaretX() == 0) deleteChar();
-            for (int x = lines.get(y).chars.size() - 1; x >= 0; x--) {
-                if (lines.get(y).chars.get(x).getIsSelect()) {
+            for (int x = lines.get(y).getChars().size() - 1; x >= 0; x--) {
+                if (lines.get(y).getChars().get(x).getIsSelect()) {
                     if (setCaret) {
                         caret.setCaretX(x + 1);
                         caret.setCaretY(y);
@@ -302,7 +314,7 @@ public class TextPanel  extends JComponent{
 
     public void inverseSelectionNext(){
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.getX() == caret.getCaretCordinateX()
                         && ch.getY() == caret.getCaretCordinateY()){
                     ch.setIsSelect(!ch.getIsSelect());
@@ -314,7 +326,7 @@ public class TextPanel  extends JComponent{
 
     public void inverseSelectionPrev(){
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.getX() + ch.getWight() + 1 == caret.getCaretCordinateX()
                         && ch.getY() == caret.getCaretCordinateY()){
                     ch.setIsSelect(!ch.getIsSelect());
@@ -334,7 +346,7 @@ public class TextPanel  extends JComponent{
             hight = 0;
         }
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (!ch.getIsSelect()) {
                     ch.setIsSelect(ch.contains(new Point(oneX, oneY), new Point(oneX, oneY - hight)));
                 } else if (ch.contains(new Point(oneX, oneY), new Point(oneX, oneY - hight))) {
@@ -355,7 +367,7 @@ public class TextPanel  extends JComponent{
             hight = 0;
         }
         for (Line line: lines) {
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (!ch.getIsSelect()) {
                     ch.setIsSelect(ch.contains(new Point(oneX, oneY), new Point(oneX, oneY + hight)));
                 } else if (ch.contains(new Point(oneX, oneY), new Point(oneX, oneY + hight))) {
@@ -369,7 +381,7 @@ public class TextPanel  extends JComponent{
     public void click(Point point) {
         for (Line line : lines) {
             line.checkEndLine(point);
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 if (ch.contains(point)) {
                     caret.setCaretY(lines.indexOf(line));
                     caret.setCaretX(line.indexOf(ch) + 1);
@@ -383,7 +395,7 @@ public class TextPanel  extends JComponent{
     public void click(Point one, Point two) {
         for (Line line : lines) {
             line.checkEndLine(two);
-            for (Char ch : line.chars) {
+            for (Char ch : line.getChars()) {
                 ch.setIsSelect(ch.contains(one, two));
                 if (ch.contains(two)) {
                     caret.setCaretY(lines.indexOf(line));
@@ -393,4 +405,5 @@ public class TextPanel  extends JComponent{
         }
         mainWindow.updateWindow();
     }
+
 }

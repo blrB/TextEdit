@@ -11,7 +11,7 @@ public class DeleteKeyListener implements KeyListener {
     private TextPanel textPanel;
 
     public DeleteKeyListener(MainWindow mainWindow){
-        textPanel = mainWindow.textPanel;
+        textPanel = mainWindow.getTextPanel();
     }
 
     public void keyPressed(KeyEvent keyEvent) {

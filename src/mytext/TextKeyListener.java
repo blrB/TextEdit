@@ -11,18 +11,19 @@ public class TextKeyListener implements KeyListener {
     private MainWindow mainWindow;
     private TextPanel textPanel;
     private Caret caret;
+    private int keyBackSpace = 8;
+    private int keyEsc = 27;
+    private int keyDelete = 127;
 
     public TextKeyListener(MainWindow mainWindow){
         this.mainWindow = mainWindow;
-        textPanel = mainWindow.textPanel;
-        caret = textPanel.caret;
+        textPanel = mainWindow.getTextPanel();
+        caret = textPanel.getCaret();
     }
 
     public void keyPressed(KeyEvent keyEvent) {
         if (KeyEvent.VK_ENTER == keyEvent.getKeyCode()) {
             textPanel.enterKey();
-        } else if (textPanel.availableKey.indexOf(keyEvent.getKeyChar()) >= 0 ) {
-            textPanel.inputCharKey(keyEvent.getKeyChar());
         }
         caret.followCaret();
         mainWindow.updateWindow();
@@ -32,6 +33,14 @@ public class TextKeyListener implements KeyListener {
     }
 
     public void keyTyped(KeyEvent keyEvent) {
+        if (!checkSystemKey(keyEvent)) {
+            textPanel.inputCharKey(keyEvent.getKeyChar());
+        }
     }
 
+    private boolean checkSystemKey(KeyEvent keyEvent){
+        return ((int)keyEvent.getKeyChar() == keyEsc ||
+                (int)keyEvent.getKeyChar() == keyBackSpace ||
+                (int)keyEvent.getKeyChar() == keyDelete);
+    }
 }

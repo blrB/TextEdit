@@ -21,16 +21,16 @@ public class Char{
     private int numberLine;
 
     public Char(char ch, MainWindow mainWindow){
-        textPanel = mainWindow.textPanel;
-        caret = textPanel.caret;
+        textPanel = mainWindow.getTextPanel();
+        caret = textPanel.getCaret();
         this.ch = ch;
         isSelect = false;
         font = getPrevFont();
     }
 
     public Char(Char ch, MainWindow mainWindow) {
-        textPanel = mainWindow.textPanel;
-        caret = textPanel.caret;
+        textPanel = mainWindow.getTextPanel();
+        caret = textPanel.getCaret();
         this.ch = ch.getCharCh();
         this.font = ch.getFont();
         this.isSelect = ch.getIsSelect();
@@ -38,8 +38,8 @@ public class Char{
     }
 
     public Char(char ch, String font, String style, String size, MainWindow mainWindow) {
-        textPanel = mainWindow.textPanel;
-        caret = textPanel.caret;
+        textPanel = mainWindow.getTextPanel();
+        caret = textPanel.getCaret();
         this.ch = ch;
         this.font = new Font(font, Integer.parseInt(style) , Integer.parseInt(size));
         this.isSelect = false;
@@ -75,22 +75,22 @@ public class Char{
     }
 
     public void setFontStyles(int style){
-        if (fontStyle == 0 && style == 1) {
-            fontStyle = 1;
-        } else if (fontStyle == 1 && style == 1) {
-            fontStyle = 0;
-        } else if (fontStyle == 0 && style == 2) {
-            fontStyle = 2;
-        } else if (fontStyle == 2 && style == 2) {
-            fontStyle = 0;
-        } else if (fontStyle == 1 && style == 2) {
-            fontStyle = 3;
-        } else if (fontStyle == 2 && style == 1) {
-            fontStyle = 3;
-        } else if (fontStyle == 3 && style == 1) {
-            fontStyle = 2;
-        } else if (fontStyle == 3 && style == 2) {
-            fontStyle = 1;
+        if (fontStyle == Font.PLAIN && style == Font.BOLD) {
+            fontStyle = Font.BOLD;
+        } else if (fontStyle == Font.BOLD && style == Font.BOLD) {
+            fontStyle = Font.PLAIN;
+        } else if (fontStyle == Font.PLAIN && style == Font.ITALIC) {
+            fontStyle = Font.ITALIC;
+        } else if (fontStyle == Font.ITALIC && style == Font.ITALIC) {
+            fontStyle = Font.PLAIN;
+        } else if (fontStyle == Font.BOLD && style == Font.ITALIC) {
+            fontStyle = Font.BOLD + Font.ITALIC;
+        } else if (fontStyle == Font.ITALIC && style == Font.BOLD) {
+            fontStyle = Font.BOLD + Font.ITALIC;
+        } else if (fontStyle == Font.BOLD + Font.ITALIC && style == Font.BOLD) {
+            fontStyle = Font.ITALIC;
+        } else if (fontStyle == Font.BOLD + Font.ITALIC && style == Font.ITALIC) {
+            fontStyle = Font.BOLD;
         }
     }
 
@@ -98,19 +98,23 @@ public class Char{
         if (caret.getCaretX() == 0 && caret.getCaretY() == 0){
             return new Font(Font.MONOSPACED, 0 , 12);
         } else {
-            if (textPanel.lines.get(caret.getCaretY()).size() != 0
+            if (textPanel.getLine().get(caret.getCaretY()).size() != 0
                     && caret.getCaretX() != 0) {
-                Char prevCh = textPanel.lines.get(caret.getCaretY())
-                        .chars.get(caret.getCaretX() - 1);
+                Char prevCh = textPanel.getLine().get(caret.getCaretY())
+                        .getChars().get(caret.getCaretX() - 1);
                 fontStyle = prevCh.getFontStyles();
                 return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
             } else {
-                int i = caret.getCaretY();
-                while (textPanel.lines.get(i - 1).size() == 0 && i > 0) i--;
-                Char prevCh = textPanel.lines.get(i - 1)
-                        .chars.get(textPanel.lines.get(i - 1).chars.size() - 1);
-                fontStyle = prevCh.getFontStyles();
-                return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
+                int i = caret.getCaretY() - 1;
+                while (i > 0 && textPanel.getLine().get(i).size() == 0) i--;
+                if (textPanel.getLine().get(i).size() != 0) {
+                    Char prevCh = textPanel.getLine().get(i)
+                            .getChars().get(textPanel.getLine().get(i).getChars().size() - 1);
+                    fontStyle = prevCh.getFontStyles();
+                    return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
+                } else{
+                    return new Font(Font.MONOSPACED, 0 , 12);
+                }
             }
         }
     }
@@ -124,7 +128,7 @@ public class Char{
     }
 
     public boolean contains(Point one, Point two) {
-        int height = textPanel.lines.get(numberLine).getMaxHight();
+        int height = textPanel.getLine().get(numberLine).getMaxHight();
         Point upPoint = (one.getY() < two.getY()) ? one : two;
         Point downPoint = (one.getY() < two.getY()) ? two : one;
         Point leftPoint = (one.getX() < two.getX()) ? one : two;
@@ -165,19 +169,18 @@ public class Char{
     public int getY(){ return y;}
 
     public void setNormalizationBold() {
-        if (fontStyle == 0) {
-            fontStyle = 1;
-        } else if (fontStyle == 2) {
-            fontStyle = 3;
+        if (fontStyle == Font.PLAIN) {
+            fontStyle = Font.BOLD;
+        } else if (fontStyle == Font.ITALIC) {
+            fontStyle = Font.BOLD + Font.ITALIC;
         }
     }
 
     public void setNormalizationItalic() {
-        if (fontStyle == 0) {
-            fontStyle = 2;
-        } else if (fontStyle == 1) {
-            fontStyle = 3;
+        if (fontStyle == Font.PLAIN) {
+            fontStyle = Font.ITALIC;
+        } else if (fontStyle == Font.BOLD) {
+            fontStyle = Font.BOLD + Font.ITALIC;
         }
     }
-
 }

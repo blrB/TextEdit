@@ -19,9 +19,9 @@ public class Caret {
 
     public Caret(MainWindow mainWindow){
         this.mainWindow = mainWindow;
-        textPanel = mainWindow.textPanel;
-        frame = mainWindow.frame;
-        scrollPanel = mainWindow.scrollPanel;
+        textPanel = mainWindow.getTextPanel();
+        frame = mainWindow.getFrame();
+        scrollPanel = mainWindow.getScrollPanel();
         caretX=0;
         caretY=0;
     }
@@ -59,22 +59,20 @@ public class Caret {
     }
 
     public void incrementCaretX() {
-        if (textPanel.lines.get(getCaretY()).size() == caretX && textPanel.lines.size() == caretY +1){
-        } else if (textPanel.lines.get(getCaretY()).size() > caretX){
+        if (textPanel.getLine().get(getCaretY()).size() == caretX && textPanel.getLine().size() == caretY +1){
+        } else if (textPanel.getLine().get(getCaretY()).size() > caretX){
             caretX++;
-        } else {
-            if (caretY < textPanel.lines.size() - 1) {
+        } else if (caretY < textPanel.getLine().size() - 1) {
                 caretY++;
                 setCaretX(0);
-            }
         }
     }
 
     public void incrementCaretY() {
-        if (caretY < textPanel.lines.size() - 1) {
+        if (caretY < textPanel.getLine().size() - 1) {
             caretY++;
-            if (textPanel.lines.get(getCaretY()).size() < caretX){
-                setCaretX(textPanel.lines.get(getCaretY()).size());
+            if (textPanel.getLine().get(getCaretY()).size() < caretX){
+                setCaretX(textPanel.getLine().get(getCaretY()).size());
             }
         }
     }
@@ -85,15 +83,15 @@ public class Caret {
             caretX--;
         } else {
             decrementCaretY();
-            setCaretX(textPanel.lines.get(getCaretY()).size());
+            setCaretX(textPanel.getLine().get(getCaretY()).size());
         }
     }
 
     public void decrementCaretY() {
         if (caretY !=0) {
             caretY--;
-            if (textPanel.lines.get(getCaretY()).size() < caretX){
-                setCaretX(textPanel.lines.get(getCaretY()).size());
+            if (textPanel.getLine().get(getCaretY()).size() < caretX){
+                setCaretX(textPanel.getLine().get(getCaretY()).size());
             }
         }
     }
@@ -120,28 +118,32 @@ public class Caret {
         if (getCaretX() == 0 && getCaretY() == 0){
             return new Font(Font.MONOSPACED, 0 , 12);
         } else {
-            if (textPanel.lines.get(getCaretY()).size() != 0
+            if (textPanel.getLine().get(getCaretY()).size() != 0
                     && getCaretX() != 0) {
-                Char prevCh = textPanel.lines.get(getCaretY())
-                        .chars.get(getCaretX() - 1);
+                Char prevCh = textPanel.getLine().get(getCaretY())
+                        .getChars().get(getCaretX() - 1);
                 return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
             } else {
-                int i = getCaretY();
-                while (textPanel.lines.get(i - 1).size() == 0 && i > 0) i--;
-                Char prevCh = textPanel.lines.get(i - 1)
-                        .chars.get(textPanel.lines.get(i - 1).chars.size() - 1);
-                return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
+                int i = getCaretY() - 1;
+                while (i > 0 && textPanel.getLine().get(i).size() == 0) i--;
+                if (textPanel.getLine().get(i).size() != 0) {
+                    Char prevCh = textPanel.getLine().get(i)
+                            .getChars().get(textPanel.getLine().get(i).getChars().size() - 1);
+                    return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
+                } else{
+                    return new Font(Font.MONOSPACED, 0 , 12);
+                }
             }
         }
     }
 
     void followCaret(){
         int x = 0;
-        if (textPanel.caret.getCaretCordinateX() > frame.getWidth()){
-            x = textPanel.caret.getCaretCordinateX();
+        if (textPanel.getCaret().getCaretCordinateX() > frame.getWidth()){
+            x = textPanel.getCaret().getCaretCordinateX();
         }
-        int y = textPanel.caret.getCaretCordinateY() -
-                textPanel.lines.get(textPanel.caret.getCaretY()).getMaxHight();
+        int y = textPanel.getCaret().getCaretCordinateY() -
+                textPanel.getLine().get(textPanel.getCaret().getCaretY()).getMaxHight();
         JViewport scrollP = scrollPanel.getViewport();
         scrollP.setViewPosition(new Point(x, y));
         scrollPanel.setViewport(scrollP);

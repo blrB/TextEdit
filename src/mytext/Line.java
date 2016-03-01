@@ -16,15 +16,18 @@ public class Line {
     private int maxLength;
     private int cordinateY;
     private int numberLine;
-
-    public List<Char> chars = new LinkedList<Char>();
+    private List<Char> chars = new LinkedList<Char>();
 
     public Line(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
-        textPanel = mainWindow.textPanel;
-        caret = textPanel.caret;
+        textPanel = mainWindow.getTextPanel();
+        caret = textPanel.getCaret();
         maxHight = 15;
         maxLength = 0;
+    }
+
+    public List<Char> getChars(){
+        return chars;
     }
 
     public void add(char ch) {
