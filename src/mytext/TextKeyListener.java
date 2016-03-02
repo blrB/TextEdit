@@ -33,7 +33,7 @@ public class TextKeyListener implements KeyListener {
     }
 
     public void keyTyped(KeyEvent keyEvent) {
-        if (!checkSystemKey(keyEvent)) {
+        if (!keyEvent.isControlDown() && !checkSystemKey(keyEvent)) {
             textPanel.inputCharKey(keyEvent.getKeyChar());
         }
     }

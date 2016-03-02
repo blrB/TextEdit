@@ -149,4 +149,20 @@ public class Caret {
         scrollPanel.setViewport(scrollP);
     }
 
+    public int returnSelectionCordinateCaretX(){
+        if (getCaretX() == 0 || textPanel.getLine().get(getCaretY()).getChars().size() == 1) {
+            return 5;
+        }  else {
+            return textPanel.getLine().get(getCaretY()).getChars().get(getCaretX()-1).getX()+1;
+        }
+    }
+
+    public int returnSelectionCordinateCaretY() {
+        if (getCaretX() == 0 || textPanel.getLine().get(getCaretY()).getChars().size() == 1) {
+            return textPanel.getLine().get(getCaretY()).getChars().get(0).getY() - 1;
+        } else {
+            return textPanel.getLine().get(getCaretY()).getChars().get(getCaretX() - 1).getY() - 1;
+        }
+    }
+
 }

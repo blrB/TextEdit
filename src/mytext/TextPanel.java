@@ -313,23 +313,36 @@ public class TextPanel  extends JComponent{
     }
 
     public void inverseSelectionNext(){
-        for (Line line: lines) {
-            for (Char ch : line.getChars()) {
-                if (ch.getX() == caret.getCaretCordinateX()
-                        && ch.getY() == caret.getCaretCordinateY()){
-                    ch.setIsSelect(!ch.getIsSelect());
+        caret.incrementCaretX();
+        if (caret.getCaretX() != 0 ) {
+            int oneX = lines.get(caret.getCaretY()).getChars().get(caret.getCaretX() - 1).getX() + 1;
+            int oneY = lines.get(caret.getCaretY()).getChars().get(caret.getCaretX() - 1).getY() - 1;
+            for (Line line : lines) {
+                for (Char ch : line.getChars()) {
+                    if (!ch.getIsSelect()) {
+                        ch.setIsSelect(ch.contains(new Point(oneX, oneY)));
+                    } else if (ch.contains(new Point(oneX, oneY))) {
+                        if (lines.indexOf(line) != lines.size() - 1 &&
+                                line.getChars().indexOf(ch) != line.getChars().size() - 1) {
+                            ch.setIsSelect(false);
+                        }
+                    }
                 }
             }
         }
-        caret.incrementCaretX();
     }
 
     public void inverseSelectionPrev(){
-        for (Line line: lines) {
-            for (Char ch : line.getChars()) {
-                if (ch.getX() + ch.getWight() + 1 == caret.getCaretCordinateX()
-                        && ch.getY() == caret.getCaretCordinateY()){
-                    ch.setIsSelect(!ch.getIsSelect());
+        if (caret.getCaretX() != 0 ) {
+            int oneX = lines.get(caret.getCaretY()).getChars().get(caret.getCaretX() - 1).getX() + 1;
+            int oneY = lines.get(caret.getCaretY()).getChars().get(caret.getCaretX() - 1).getY() - 1;
+            for (Line line : lines) {
+                for (Char ch : line.getChars()) {
+                    if (!ch.getIsSelect()) {
+                        ch.setIsSelect(ch.contains(new Point(oneX, oneY)));
+                    } else if (ch.contains(new Point(oneX, oneY))) {
+                        ch.setIsSelect(false);
+                    }
                 }
             }
         }
@@ -337,45 +350,37 @@ public class TextPanel  extends JComponent{
     }
 
     public void inverseSelectionUp(){
-        int oneX = caret.getCaretCordinateX() - 1;
-        int oneY = caret.getCaretCordinateY() - 1;
-        int hight;
-        if (caret.getCaretY() > 0) {
-            hight = lines.get(caret.getCaretY()).getMaxHight();
-        } else {
-            hight = 0;
-        }
+        int oneX = caret.returnSelectionCordinateCaretX();
+        int oneY = caret.returnSelectionCordinateCaretY();
+        caret.decrementCaretY();
+        int twoX = caret.returnSelectionCordinateCaretX();
+        int twoY = caret.returnSelectionCordinateCaretY();
         for (Line line: lines) {
             for (Char ch : line.getChars()) {
                 if (!ch.getIsSelect()) {
-                    ch.setIsSelect(ch.contains(new Point(oneX, oneY), new Point(oneX, oneY - hight)));
-                } else if (ch.contains(new Point(oneX, oneY), new Point(oneX, oneY - hight))) {
+                    ch.setIsSelect(ch.contains(new Point(oneX, oneY), new Point(twoX, twoY)));
+                } else if (ch.contains(new Point(oneX, oneY), new Point(twoX, twoY))) {
                     ch.setIsSelect(false);
                 }
             }
         }
-        caret.decrementCaretY();
     }
 
     public void inverseSelectionDown(){
-        int oneX = caret.getCaretCordinateX() - 1;
-        int oneY = caret.getCaretCordinateY() - 1;
-        int hight;
-        if (caret.getCaretY() < lines.size() - 1) {
-            hight = lines.get(caret.getCaretY()).getMaxHight();
-        } else {
-            hight = 0;
-        }
+        int oneX = caret.returnSelectionCordinateCaretX();
+        int oneY = caret.returnSelectionCordinateCaretY();
+        caret.incrementCaretY();
+        int twoX = caret.returnSelectionCordinateCaretX();
+        int twoY = caret.returnSelectionCordinateCaretY();
         for (Line line: lines) {
             for (Char ch : line.getChars()) {
                 if (!ch.getIsSelect()) {
-                    ch.setIsSelect(ch.contains(new Point(oneX, oneY), new Point(oneX, oneY + hight)));
-                } else if (ch.contains(new Point(oneX, oneY), new Point(oneX, oneY + hight))) {
+                    ch.setIsSelect(ch.contains(new Point(oneX, oneY), new Point(twoX, twoY)));
+                } else if (ch.contains(new Point(oneX, oneY), new Point(twoX, twoY))) {
                     ch.setIsSelect(false);
                 }
             }
         }
-        caret.incrementCaretY();
     }
 
     public void click(Point point) {
