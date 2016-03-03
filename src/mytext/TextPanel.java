@@ -293,6 +293,14 @@ public class TextPanel  extends JComponent{
         return setCaret;
     }
 
+    public void falseAllSelection(){
+        for (Line line: lines) {
+            for (Char ch : line.getChars()) {
+                ch.setIsSelect(false);
+            }
+        }
+    }
+
     public void backSpaceKey(){
         if (deleteSelectedText()) deleteChar();
     }

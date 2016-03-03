@@ -158,8 +158,8 @@ public class Caret {
     }
 
     public int returnSelectionCordinateCaretY() {
-        if (getCaretX() == 0 || textPanel.getLine().get(getCaretY()).getChars().size() == 1) {
-            return textPanel.getLine().get(getCaretY()).getChars().get(0).getY() - 1;
+        if (getCaretX() == 0 || textPanel.getLine().get(getCaretY()).getChars().size() == 0) {
+            return textPanel.getLine().get(getCaretY()).getCordinateY();
         } else {
             return textPanel.getLine().get(getCaretY()).getChars().get(getCaretX() - 1).getY() - 1;
         }

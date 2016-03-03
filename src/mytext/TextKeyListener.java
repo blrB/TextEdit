@@ -12,6 +12,7 @@ public class TextKeyListener implements KeyListener {
     private TextPanel textPanel;
     private Caret caret;
     private int keyBackSpace = 8;
+    private int keyEnter = 10;
     private int keyEsc = 27;
     private int keyDelete = 127;
 
@@ -41,6 +42,7 @@ public class TextKeyListener implements KeyListener {
     private boolean checkSystemKey(KeyEvent keyEvent){
         return ((int)keyEvent.getKeyChar() == keyEsc ||
                 (int)keyEvent.getKeyChar() == keyBackSpace ||
-                (int)keyEvent.getKeyChar() == keyDelete);
+                (int)keyEvent.getKeyChar() == keyDelete ||
+                (int)keyEvent.getKeyChar() == keyEnter);
     }
 }

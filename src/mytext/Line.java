@@ -87,6 +87,10 @@ public class Line {
 
     public void setCordinateY(int c) { cordinateY = c; }
 
+    public int getCordinateY() {
+        return cordinateY;
+    }
+
     public void setNumberLine(int number) {
         this.numberLine = number;
     }
