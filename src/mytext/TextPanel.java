@@ -330,8 +330,10 @@ public class TextPanel  extends JComponent{
                     if (!ch.getIsSelect()) {
                         ch.setIsSelect(ch.contains(new Point(oneX, oneY)));
                     } else if (ch.contains(new Point(oneX, oneY))) {
-                        if (lines.indexOf(line) != lines.size() - 1 &&
-                                line.getChars().indexOf(ch) != line.getChars().size() - 1) {
+                        if (lines.indexOf(line) == lines.size() - 1 &&
+                                line.getChars().indexOf(ch) == line.getChars().size() - 1) {
+                            ch.setIsSelect(true);
+                        } else {
                             ch.setIsSelect(false);
                         }
                     }
