@@ -17,81 +17,81 @@ public class Caret {
     private int caretCordinateX;
     private int caretCordinateY;
 
-    public Caret(MainWindow mainWindow){
+    public Caret(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         textPanel = mainWindow.getTextPanel();
         frame = mainWindow.getFrame();
         scrollPanel = mainWindow.getScrollPanel();
-        caretX=0;
-        caretY=0;
+        caretX = 0;
+        caretY = 0;
     }
 
-    public void setCaretX(int x){
-        caretX = x;
-    }
-
-    public int getCaretX(){
+    public int getCaretX() {
         return caretX;
     }
 
-    public void setCaretY(int y){
-        caretY = y;
+    public void setCaretX(int x) {
+        caretX = x;
     }
 
-    public int getCaretY(){
+    public int getCaretY() {
         return caretY;
     }
 
-    public void setCaretCordinateX(int x){
-        caretCordinateX = x;
+    public void setCaretY(int y) {
+        caretY = y;
     }
 
-    public void setCaretCordinateY(int y){
-        caretCordinateY = y;
-    }
-
-    public int getCaretCordinateX(){
+    public int getCaretCordinateX() {
         return caretCordinateX;
     }
 
-    public int getCaretCordinateY(){
+    public void setCaretCordinateX(int x) {
+        caretCordinateX = x;
+    }
+
+    public int getCaretCordinateY() {
         return caretCordinateY;
     }
 
+    public void setCaretCordinateY(int y) {
+        caretCordinateY = y;
+    }
+
     public void incrementCaretX() {
-        if (textPanel.getLine().get(getCaretY()).size() == caretX && textPanel.getLine().size() == caretY +1){
-        } else if (textPanel.getLine().get(getCaretY()).size() > caretX){
+        if (textPanel.getLines().get(getCaretY()).size() == caretX && textPanel.getLines().size() == caretY + 1) {
+        } else if (textPanel.getLines().get(getCaretY()).size() > caretX) {
             caretX++;
-        } else if (caretY < textPanel.getLine().size() - 1) {
-                caretY++;
-                setCaretX(0);
+        } else if (caretY < textPanel.getLines().size() - 1) {
+            caretY++;
+            setCaretX(0);
         }
     }
 
     public void incrementCaretY() {
-        if (caretY < textPanel.getLine().size() - 1) {
+        if (caretY < textPanel.getLines().size() - 1) {
             caretY++;
-            if (textPanel.getLine().get(getCaretY()).size() < caretX){
-                setCaretX(textPanel.getLine().get(getCaretY()).size());
+            if (textPanel.getLines().get(getCaretY()).size() < caretX) {
+                setCaretX(textPanel.getLines().get(getCaretY()).size());
             }
         }
     }
 
     public void decrementCaretX() {
-        if (caretX == 0 && caretY ==0) {
-        } else if (caretX != 0){
+        if (caretX == 0 && caretY == 0) {
+        } else if (caretX != 0) {
             caretX--;
         } else {
             decrementCaretY();
-            setCaretX(textPanel.getLine().get(getCaretY()).size());
+            setCaretX(textPanel.getLines().get(getCaretY()).size());
         }
     }
 
     public void decrementCaretY() {
-        if (caretY !=0) {
+        if (caretY != 0) {
             caretY--;
-            if (textPanel.getLine().get(getCaretY()).size() < caretX){
-                setCaretX(textPanel.getLine().get(getCaretY()).size());
+            if (textPanel.getLines().get(getCaretY()).size() < caretX) {
+                setCaretX(textPanel.getLines().get(getCaretY()).size());
             }
         }
     }
@@ -100,69 +100,76 @@ public class Caret {
         int caretCordinateX = getCaretCordinateX();
         int caretCordinateY = getCaretCordinateY();
         Graphics2D graphics2d = (Graphics2D) textPanel.getGraphics();
-        try {
-            Font f = getPrevFont();
-            graphics2d.setFont(f);
-        } catch (Exception e){}
-        graphics2d.drawString("_",caretCordinateX,caretCordinateY);
+        Font f = getPrevFont();
+        graphics2d.setFont(f);
+        graphics2d.drawString("_", caretCordinateX, caretCordinateY);
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         graphics2d.setColor(textPanel.getBackground());
-        graphics2d.drawString("_",caretCordinateX,caretCordinateY);
+        graphics2d.drawString("_", caretCordinateX, caretCordinateY);
     }
 
-    public Font getPrevFont(){
-        if (getCaretX() == 0 && getCaretY() == 0){
-            return new Font(Font.MONOSPACED, 0 , 12);
+    public Font getPrevFont() {
+        if (getCaretX() == 0 && getCaretY() == 0) {
+            return new Font(Font.MONOSPACED, 0, 12);
         } else {
-            if (textPanel.getLine().get(getCaretY()).size() != 0
+            if (textPanel.getLines().get(getCaretY()).size() != 0
                     && getCaretX() != 0) {
-                Char prevCh = textPanel.getLine().get(getCaretY())
+                Char prevCh = textPanel.getLines().get(getCaretY())
                         .getChars().get(getCaretX() - 1);
                 return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
             } else {
                 int i = getCaretY() - 1;
-                while (i > 0 && textPanel.getLine().get(i).size() == 0) i--;
-                if (textPanel.getLine().get(i).size() != 0) {
-                    Char prevCh = textPanel.getLine().get(i)
-                            .getChars().get(textPanel.getLine().get(i).getChars().size() - 1);
+                while (i > 0 && textPanel.getLines().get(i).size() == 0) i--;
+                if (textPanel.getLines().get(i).size() != 0) {
+                    Char prevCh = textPanel.getLines().get(i)
+                            .getChars().get(textPanel.getLines().get(i).getChars().size() - 1);
                     return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
-                } else{
-                    return new Font(Font.MONOSPACED, 0 , 12);
+                } else {
+                    return new Font(Font.MONOSPACED, 0, 12);
                 }
             }
         }
     }
 
-    void followCaret(){
+    void followCaret() {
         int x = 0;
-        if (textPanel.getCaret().getCaretCordinateX() > frame.getWidth()){
+        if (textPanel.getCaret().getCaretCordinateX() > frame.getWidth()) {
             x = textPanel.getCaret().getCaretCordinateX();
         }
         int y = textPanel.getCaret().getCaretCordinateY() -
-                textPanel.getLine().get(textPanel.getCaret().getCaretY()).getMaxHight();
+                textPanel.getLines().get(textPanel.getCaret().getCaretY()).getMaxHight();
         JViewport scrollP = scrollPanel.getViewport();
         scrollP.setViewPosition(new Point(x, y));
         scrollPanel.setViewport(scrollP);
     }
 
-    public int returnSelectionCordinateCaretX(){
-        if (getCaretX() == 0 || textPanel.getLine().get(getCaretY()).getChars().size() == 1) {
+    public int returnSelectionCordinateCaretX() {
+        if (isFirstChar()) {
             return 5;
-        }  else {
-            return textPanel.getLine().get(getCaretY()).getChars().get(getCaretX()-1).getX()+1;
+        } else {
+            return textPanel.getLines().get(getCaretY()).getChars().get(getCaretX() - 1).getX() + 1;
         }
     }
 
     public int returnSelectionCordinateCaretY() {
-        if (getCaretX() == 0 || textPanel.getLine().get(getCaretY()).getChars().size() == 0) {
-            return textPanel.getLine().get(getCaretY()).getCordinateY();
+        final Line line = textPanel.getLines().get(getCaretY());
+        if (isLineEmpty()) {
+            return line.getCordinateY();
         } else {
-            return textPanel.getLine().get(getCaretY()).getChars().get(getCaretX() - 1).getY() - 1;
+            return line.getChars().get(getCaretX() - 1).getY() - 1;
         }
+    }
+
+    private boolean isFirstChar() {
+        return getCaretX() == 0 || textPanel.getLines().get(getCaretY()).getChars().size() == 1;
+    }
+
+    private boolean isLineEmpty() {
+        return getCaretX() == 0 || textPanel.getLines().get(getCaretY()).getChars().size() == 0;
     }
 
 }

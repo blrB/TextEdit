@@ -9,13 +9,13 @@ import java.util.ArrayList;
 /**
  * Created by andrey on 26/02/16.
  */
-public class FileWork {
+public class FileHandler {
 
     private MainWindow mainWindow;
     private TextPanel textPanel;
     private Caret caret;
 
-    public FileWork(MainWindow mainWindow){
+    public FileHandler(MainWindow mainWindow){
         this.mainWindow = mainWindow;
         textPanel = mainWindow.getTextPanel();
         caret = textPanel.getCaret();
@@ -44,7 +44,7 @@ public class FileWork {
                         (new FileWriter(fc.getSelectedFile() + ".mytext"));
                 writer.writeStartDocument("UTF-8", "1.0");
                 writer.writeStartElement("text");
-                for (Line line : textPanel.getLine()) {
+                for (Line line : textPanel.getLines()) {
                     writer.writeStartElement("line");
                     for (Char ch : line.getChars()) {
                         writer.writeStartElement("char");
@@ -89,7 +89,7 @@ public class FileWork {
                     }
                 } else if (xmlr.isEndElement()) {
                     if (xmlr.getLocalName().equals("line")){
-                        textPanel.getLine().add(newLine);
+                        textPanel.getLines().add(newLine);
                     }
                 }
             }
@@ -113,7 +113,7 @@ public class FileWork {
                 for (char ch: newCharArray){
                     newLine.add(ch);
                 }
-                textPanel.getLine().add(newLine);
+                textPanel.getLines().add(newLine);
             }
             mainWindow.updateWindow();
         }

@@ -86,11 +86,11 @@ public class TextPanel  extends JComponent{
         return caret;
     }
 
-    public List<Line> getLine(){
+    public List<Line> getLines(){
         return lines;
     }
 
-    public void setLine(ArrayList<Line> lines) {
+    public void setLine(List<Line> lines) {
         this.lines = lines;
     }
 
@@ -174,8 +174,12 @@ public class TextPanel  extends JComponent{
         for (Line line: lines) {
             for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()) {
-                    if (ch.getFontStyles() == 0 || ch.getFontStyles() == 2) notBold = true;
-                    if (ch.getFontStyles() == 1 || ch.getFontStyles() == 3) bold = true;
+                    if (ch.getFontStyles() == Font.PLAIN || ch.getFontStyles() == Font.ITALIC) {
+                        notBold = true;
+                    }
+                    if (ch.getFontStyles() == Font.BOLD || ch.getFontStyles() == Font.BOLD + Font.ITALIC){
+                        bold = true;
+                    }
                 }
             }
         }
@@ -183,7 +187,7 @@ public class TextPanel  extends JComponent{
             for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()) {
                     if (bold && notBold) ch.setNormalizationBold();
-                    else ch.setFontStyles(1);
+                    else ch.setFontStyles(Font.BOLD);
                 }
             }
         }
@@ -195,8 +199,12 @@ public class TextPanel  extends JComponent{
         for (Line line: lines) {
             for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()){
-                    if (ch.getFontStyles() == 0 || ch.getFontStyles() == 1) notItalic = true;
-                    if (ch.getFontStyles() == 2 || ch.getFontStyles() == 3) italic = true;
+                    if (ch.getFontStyles() == Font.PLAIN || ch.getFontStyles() == Font.BOLD) {
+                        notItalic = true;
+                    }
+                    if (ch.getFontStyles() == Font.ITALIC || ch.getFontStyles() == Font.ITALIC + Font.BOLD) {
+                        italic = true;
+                    }
                 }
             }
         }
@@ -204,7 +212,7 @@ public class TextPanel  extends JComponent{
             for (Char ch : line.getChars()) {
                 if (ch.getIsSelect()){
                     if (italic && notItalic) ch.setNormalizationItalic();
-                    else ch.setFontStyles(2);
+                    else ch.setFontStyles(Font.ITALIC);
                 }
             }
         }

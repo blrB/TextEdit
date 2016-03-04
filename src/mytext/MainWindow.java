@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 public class MainWindow {
 
-    private FileWork fileWork;
+    private FileHandler fileWork;
     private TextPanel textPanel;
     private JFrame frame;
     private JScrollPane scrollPanel;
@@ -26,7 +26,7 @@ public class MainWindow {
         textPanel = new TextPanel(this);
         scrollPanel = new JScrollPane(textPanel);
         textPanel.createInput();
-        fileWork = new FileWork(this);
+        fileWork = new FileHandler(this);
         frame.add(scrollPanel, BorderLayout.CENTER);
         frame.setSize(800,600);
         frame.setFocusable(true);

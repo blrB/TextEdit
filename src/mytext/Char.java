@@ -98,18 +98,18 @@ public class Char{
         if (caret.getCaretX() == 0 && caret.getCaretY() == 0){
             return new Font(Font.MONOSPACED, 0 , 12);
         } else {
-            if (textPanel.getLine().get(caret.getCaretY()).size() != 0
+            if (textPanel.getLines().get(caret.getCaretY()).size() != 0
                     && caret.getCaretX() != 0) {
-                Char prevCh = textPanel.getLine().get(caret.getCaretY())
+                Char prevCh = textPanel.getLines().get(caret.getCaretY())
                         .getChars().get(caret.getCaretX() - 1);
                 fontStyle = prevCh.getFontStyles();
                 return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
             } else {
                 int i = caret.getCaretY() - 1;
-                while (i > 0 && textPanel.getLine().get(i).size() == 0) i--;
-                if (textPanel.getLine().get(i).size() != 0) {
-                    Char prevCh = textPanel.getLine().get(i)
-                            .getChars().get(textPanel.getLine().get(i).getChars().size() - 1);
+                while (i > 0 && textPanel.getLines().get(i).size() == 0) i--;
+                if (textPanel.getLines().get(i).size() != 0) {
+                    Char prevCh = textPanel.getLines().get(i)
+                            .getChars().get(textPanel.getLines().get(i).getChars().size() - 1);
                     fontStyle = prevCh.getFontStyles();
                     return new Font(prevCh.getFontType(), 0, prevCh.getFontSize());
                 } else{
@@ -128,7 +128,7 @@ public class Char{
     }
 
     public boolean contains(Point one, Point two) {
-        int height = textPanel.getLine().get(numberLine).getMaxHight();
+        int height = textPanel.getLines().get(numberLine).getMaxHight();
         Point upPoint = (one.getY() < two.getY()) ? one : two;
         Point downPoint = (one.getY() < two.getY()) ? two : one;
         Point leftPoint = (one.getX() < two.getX()) ? one : two;
